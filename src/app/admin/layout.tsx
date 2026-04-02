@@ -12,7 +12,7 @@ const navItems = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/bookings', label: 'Bookings', icon: Calendar },
   { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
-  { href: '/admin/blog', label: 'Blog (CMS)', icon: FileText, external: true, externalHref: '/studio' },
+  { href: '/admin/blog', label: 'Update Pages / Publish Blogs', icon: FileText, external: true, externalHref: 'https://www.sanity.io/@oVp0t3aVR/studio/xlgw8cy8lka4jbeqt4ebdcm6/soultails/structure' },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 
