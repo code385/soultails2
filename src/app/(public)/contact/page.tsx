@@ -49,7 +49,7 @@ export default function ContactPage() {
           <div className="section-tag mb-4 justify-center">Get in touch</div>
           <h1 className="font-heading text-4xl lg:text-5xl font-semibold text-brand-text mb-4">Contact us</h1>
           <p className="font-body text-lg text-brand-muted max-w-xl mx-auto">
-            Have a question? We'd love to hear from you. Dr. Claudia responds within 24 hours.
+            Have a question? We&apos;d love to hear from you. Dr. Claudia responds within 24 hours.
           </p>
         </div>
 

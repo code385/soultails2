@@ -19,7 +19,7 @@ export default function ServicesPage() {
             <div className="section-tag mb-4">What we offer</div>
             <h1 className="font-heading text-4xl lg:text-5xl font-bold text-brand-text mb-6">Our services</h1>
             <p className="font-body text-lg text-brand-muted leading-relaxed">
-              Expert integrative veterinary care — tailored to your pet's individual needs, delivered in your home or online.
+              Expert integrative veterinary care — tailored to your pet&apos;s individual needs, delivered in your home or online.
             </p>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function ServicesPage() {
       <section className="cta-gradient py-16">
         <div className="container-site text-center">
           <h2 className="font-heading text-3xl font-semibold text-white mb-4">Not sure which service you need?</h2>
-          <p className="font-body mb-8 max-w-md mx-auto" style={{ color: 'rgba(255,255,255,0.8)' }}>Send us a message and we'll help you find the right care for your pet.</p>
+          <p className="font-body mb-8 max-w-md mx-auto" style={{ color: 'rgba(255,255,255,0.8)' }}>Send us a message and we&apos;ll help you find the right care for your pet.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-white font-body font-bold text-sm rounded-full hover:bg-cream transition-all"
             style={{ color: 'var(--color-primary)' }}>
             Get in touch <ArrowRight size={16} />

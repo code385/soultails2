@@ -104,7 +104,7 @@ export default function BookPage() {
         <div className="text-center mb-10">
           <div className="section-tag mb-4 justify-center">Consultations</div>
           <h1 className="font-heading text-4xl font-semibold text-brand-text mb-3">Book a consultation</h1>
-          <p className="font-body text-brand-muted">Choose how you'd like to connect with Dr. Claudia</p>
+          <p className="font-body text-brand-muted">Choose how you&apos;d like to connect with Dr. Claudia</p>
         </div>
 
         {/* Mode selector */}
