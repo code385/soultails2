@@ -16,8 +16,9 @@ export async function POST(req: NextRequest) {
   const booking = await prisma.booking.findUnique({ where: { id: bookingId } })
   if (!booking) return NextResponse.json({ error: 'Booking not found' }, { status: 404 })
 
-  // Create Stripe payment link
-  const paymentLink = await stripe.paymentLinks.create({
+  // Create Stripe checkout session
+  const paymentLink = await stripe.checkout.sessions.create({
+    mode: 'payment',
     line_items: [{
       price_data: {
         currency: 'gbp',
@@ -29,10 +30,8 @@ export async function POST(req: NextRequest) {
       },
       quantity: 1,
     }],
-    after_completion: {
-      type: 'redirect',
-      redirect: { url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment-complete` },
-    },
+    success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment-complete`,
+    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment-cancelled`,
     metadata: { bookingId },
   })
 
