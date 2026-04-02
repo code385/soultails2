@@ -21,6 +21,12 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://soultails.com'),
+  icons: {
+    icon: [
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    apple: '/icon.png',
+  },
   title: {
     default: 'Soultails | Expert Integrative Veterinary Care — Dr. Claudia Fioravanti',
     template: '%s | Soultails Veterinary Care',
