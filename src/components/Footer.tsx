@@ -20,7 +20,9 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
+               <div className="relative w-14 h-14 flex-shrink-0 p-1.5">
                 <Image src="/logo.png" alt="Soultails" fill className="object-contain p-0.5" />
+              </div>
               <div>
                 <div className="font-heading text-xl font-semibold" style={{ color: '#B784C4' }}>Soultails</div>
                 <div className="font-body text-xs tracking-wide" style={{ color: 'rgba(255,255,255,0.45)' }}>Veterinary Services</div>
