@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { stripe } from '@/lib/stripe'
 import { z } from 'zod'
-import { sendBookingConfirmationToAdmin, sendBookingConfirmationToClient } from '@/emails'
+import { sendBookingConfirmationToAdmin } from '@/emails'
 
 const bookingSchema = z.object({
   clientName: z.string().min(2),

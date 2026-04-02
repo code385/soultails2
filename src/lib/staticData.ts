@@ -215,6 +215,6 @@ export const SITE_SETTINGS = {
   doctorName: "Dr. Claudia Fioravanti",
   tagline: "Integrative veterinary care for the whole animal",
   credentials: ["DVM", "MRCVS", "CertAVP", "ISFMAdvCerFB"],
-  email: "hello@soultails.com",
+  email: "soultailsinfo@gmail.com",
   serviceArea: "London & surrounding areas",
 }
