@@ -13,7 +13,7 @@ export function LocalBusinessSchema() {
     founder: {
       '@type': 'Person',
       name: 'Dr. Claudia Fioravanti',
-      jobTitle: 'Veterinary Surgeon',
+      jobTitle: 'Integrative Veterinary Expert',
       description: 'DVM MRCVS CertAVP ISFMAdvCerFB — Expert integrative veterinary care',
     },
     hasOfferCatalog: {

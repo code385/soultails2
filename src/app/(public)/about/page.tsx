@@ -79,7 +79,7 @@ export default async function AboutPage() {
                     <p>Soultails aims to bring a high quality veterinary service to the comfort of your home. We specifically wanted it to be targeted to your pet&apos;s needs and built it with their personality and desires in mind. This embraces a new fairer concept of contextualised veterinary care, with the pet and its family at the centre of it.</p>
                     <p>In our healing concept, family members also play an important role, and we will strive to guide you on the best route to keep your pet in full health for hopefully many years to come.</p>
                     <p>As such we love to use alternative treatment options to integrate western veterinary medicine with holistic treatments and techniques in a more rounded vision of veterinary medicine — including acupuncture, osteopathy, herbal medicine, essential oils, and nutritional therapy.</p>
-                    <p>Dr. Claudia Fioravanti is a highly qualified veterinary surgeon with advanced certifications in feline behaviour and veterinary practice, serving South East London and part of Kent.</p>
+                    <p>Dr. Claudia Fioravanti is a highly qualified integrative veterinary expert with advanced certifications in feline behaviour and veterinary practice, serving South East London and part of Kent.</p>
                   </>
                 )}
               </div>
