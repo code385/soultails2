@@ -88,7 +88,7 @@ export default async function AboutPage() {
 
               <div className="bg-cream-dark rounded-xl p-6 border border-linen">
                 <p className="font-body text-sm text-brand-muted leading-relaxed italic">
-                  "My goal is to provide every animal with the most thoughtful, comprehensive care possible — treating not just the symptoms, but the whole being."
+                  &ldquo;My goal is to provide every animal with the most thoughtful, comprehensive care possible — treating not just the symptoms, but the whole being.&rdquo;
                 </p>
                 <p className="font-body text-sm font-medium text-brand-text mt-3">— Dr. Claudia Fioravanti</p>
               </div>
