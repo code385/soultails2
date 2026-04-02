@@ -12,20 +12,29 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: { email: { type: "email" }, password: { type: "password" } },
-      async authorize(creds, req) {
-        if (!creds?.email || !creds?.password) throw new Error("Missing credentials")
-        const ip = (req?.headers as any)?.["x-forwarded-for"] ?? "unknown"
-        const key = `${ip}:${creds.email}`
-        const now = Date.now()
-        const rec = attempts.get(key)
-        if (rec && rec.n >= 5 && now - rec.t < 15 * 60000) throw new Error("Too many attempts. Wait 15 minutes.")
-        const user = await prisma.user.findUnique({ where: { email: creds.email.toLowerCase().trim() } })
-        if (!user || !(await bcrypt.compare(creds.password, user.password))) {
-          attempts.set(key, { n: (rec?.n ?? 0) + 1, t: now })
-          throw new Error("Invalid credentials")
+      async authorize(creds) {
+        try {
+          if (!creds?.email || !creds?.password) return null
+          const key = creds.email.toLowerCase().trim()
+          const now = Date.now()
+          const rec = attempts.get(key)
+          if (rec && rec.n >= 5 && now - rec.t < 15 * 60000) return null
+          const user = await prisma.user.findUnique({ where: { email: key } })
+          if (!user) {
+            attempts.set(key, { n: (rec?.n ?? 0) + 1, t: now })
+            return null
+          }
+          const valid = await bcrypt.compare(creds.password, user.password)
+          if (!valid) {
+            attempts.set(key, { n: (rec?.n ?? 0) + 1, t: now })
+            return null
+          }
+          attempts.delete(key)
+          return { id: user.id, email: user.email, name: user.name, role: user.role }
+        } catch (err) {
+          console.error('[auth] authorize error:', err)
+          return null
         }
-        attempts.delete(key)
-        return { id: user.id, email: user.email, name: user.name, role: user.role }
       },
     }),
   ],
