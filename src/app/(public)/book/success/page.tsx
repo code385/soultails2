@@ -56,8 +56,8 @@ export default function BookSuccessPage() {
 
         <p className="font-body text-xs text-brand-subtle mt-8">
           Questions? Email us at{' '}
-          <a href="mailto:hello@soultails.com" className="text-primary hover:underline">
-            hello@soultails.com
+          <a href="mailto:soultailsinfo@gmail.com" className="text-primary hover:underline">
+            soultailsinfo@gmail.com
           </a>
         </p>
       </div>

@@ -77,10 +77,10 @@ export default function Footer() {
             <h3 className="font-body font-bold text-sm tracking-wide mb-4" style={{ color: 'white' }}>Get in touch</h3>
             <ul className="space-y-3">
               <li>
-                <a href="mailto:hello@soultails.com" className="flex items-start gap-2.5 text-sm font-body hover:text-white transition-colors"
+                <a href="mailto:soultailsinfo@gmail.com" className="flex items-start gap-2.5 text-sm font-body hover:text-white transition-colors"
                   style={{ color: 'rgba(255,255,255,0.5)' }}>
                   <Mail size={14} className="mt-0.5 flex-shrink-0" style={{ color: '#C85B6E' }} />
-                  hello@soultails.com
+                  soultailsinfo@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2.5 text-sm font-body" style={{ color: 'rgba(255,255,255,0.5)' }}>
@@ -106,6 +106,7 @@ export default function Footer() {
           <div className="flex gap-4">
             <Link href="/privacy" className="text-xs font-body hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.3)' }}>Privacy</Link>
             <Link href="/terms" className="text-xs font-body hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.3)' }}>Terms</Link>
+            <Link href="/admin/login" className="text-xs font-body hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.3)' }}>Admin</Link>
           </div>
         </div>
       </div>

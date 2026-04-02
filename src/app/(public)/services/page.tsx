@@ -1,7 +1,10 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Video, Home, Heart, Leaf, Activity, Star } from 'lucide-react'
+import { getAllServices } from '@/lib/sanity'
 import { STATIC_SERVICES } from '@/lib/staticData'
+
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Veterinary Services',
@@ -10,7 +13,10 @@ export const metadata: Metadata = {
 
 const iconMap: Record<string, any> = { Video, Home, Heart, Leaf, Activity, Cat: Heart, Star }
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const sanityServices = await getAllServices().catch(() => [])
+  const services = sanityServices.length > 0 ? sanityServices : STATIC_SERVICES
+
   return (
     <>
       <section className="pt-28 pb-16" style={{ background: 'var(--color-cream-dark)' }}>
@@ -28,7 +34,7 @@ export default function ServicesPage() {
       <section className="section-pad bg-white">
         <div className="container-site">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {STATIC_SERVICES.map(s => {
+            {services.map((s: any) => {
               const Icon = iconMap[s.icon] ?? Heart
               return (
                 <Link key={s.slug} href={`/services/${s.slug}`}

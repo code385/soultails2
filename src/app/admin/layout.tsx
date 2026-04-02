@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
   LayoutDashboard, Calendar, MessageSquare, FileText,
-  LogOut, Menu, X, ExternalLink
+  LogOut, Menu, X, ExternalLink, Settings
 } from 'lucide-react'
 
 const navItems = [
@@ -13,6 +13,7 @@ const navItems = [
   { href: '/admin/bookings', label: 'Bookings', icon: Calendar },
   { href: '/admin/messages', label: 'Messages', icon: MessageSquare },
   { href: '/admin/blog', label: 'Blog (CMS)', icon: FileText, external: true, externalHref: '/studio' },
+  { href: '/admin/settings', label: 'Settings', icon: Settings },
 ]
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -22,8 +23,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
-    if (status === 'unauthenticated') router.replace('/admin/login')
-  }, [status, router])
+    if (pathname !== '/admin/login' && status === 'unauthenticated') router.replace('/admin/login')
+  }, [status, router, pathname])
+
+  // Login page ko sidebar/auth wrapper ki zaroorat nahi
+  if (pathname === '/admin/login') return <>{children}</>
 
   if (status === 'loading' || !session) {
     return (

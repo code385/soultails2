@@ -2,6 +2,10 @@ import Link from 'next/link'
 import { ArrowRight, CheckCircle, Star, Video, Home, Heart, Leaf, Activity } from 'lucide-react'
 import { Metadata } from 'next'
 import { STATIC_SERVICES, STATIC_POSTS, SITE_SETTINGS } from '@/lib/staticData'
+import { getFeaturedServices, getFeaturedPosts, getAllPosts, getSiteSettings } from '@/lib/sanity'
+import { urlFor } from '@/lib/sanity'
+
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Soultails | Expert Integrative Veterinary Care UK',
@@ -19,9 +23,23 @@ const features = [
   'Evidence-based holistic approach',
 ]
 
-export default function HomePage() {
-  const featuredServices = STATIC_SERVICES.slice(0, 6)
-  const featuredPosts = STATIC_POSTS.filter(p => p.featured).slice(0, 3)
+export default async function HomePage() {
+  const [sanityServices, sanityFeaturedPosts, sanityAllPosts, settings] = await Promise.all([
+    getFeaturedServices().catch(() => []),
+    getFeaturedPosts().catch(() => []),
+    getAllPosts().catch(() => []),
+    getSiteSettings().catch(() => null),
+  ])
+
+  const featuredServices = sanityServices.length > 0 ? sanityServices : STATIC_SERVICES.slice(0, 6)
+  // Featured posts pehle, nahi hain toh latest 3, nahi hain toh static
+  const featuredPosts = sanityFeaturedPosts.length > 0
+    ? sanityFeaturedPosts
+    : sanityAllPosts.length > 0
+      ? sanityAllPosts.slice(0, 3)
+      : STATIC_POSTS.filter(p => p.featured).slice(0, 3)
+  const doctorName = settings?.doctorName ?? SITE_SETTINGS.doctorName
+  const credentials = settings?.credentials ?? SITE_SETTINGS.credentials
 
   return (
     <>
@@ -49,7 +67,7 @@ export default function HomePage() {
                 <Link href="/services" className="btn-outline px-7 py-3.5 text-base">Our services</Link>
               </div>
               <div className="flex flex-wrap gap-2">
-                {SITE_SETTINGS.credentials.map(c => (
+                {credentials.map((c: string) => (
                   <span key={c} className="font-body text-xs font-semibold px-3 py-1.5 bg-white border border-linen rounded-full text-brand-muted">{c}</span>
                 ))}
               </div>
@@ -63,8 +81,8 @@ export default function HomePage() {
                     <span className="font-heading text-xl font-bold" style={{ color: 'var(--color-primary)' }}>CF</span>
                   </div>
                   <div>
-                    <div className="font-heading text-lg font-semibold text-brand-text">{SITE_SETTINGS.doctorName}</div>
-                    <div className="font-body text-sm text-brand-muted">{SITE_SETTINGS.credentials.join(' · ')}</div>
+                    <div className="font-heading text-lg font-semibold text-brand-text">{doctorName}</div>
+                    <div className="font-body text-sm text-brand-muted">{credentials.join(' · ')}</div>
                   </div>
                 </div>
                 <div className="space-y-3">
@@ -135,7 +153,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredServices.map(s => {
+            {featuredServices.map((s: any) => {
               const Icon = iconMap[s.icon] ?? Heart
               return (
                 <Link key={s.slug} href={`/services/${s.slug}`} className="card p-6 group block">
@@ -190,21 +208,27 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredPosts.map(p => (
-                <Link key={p.slug} href={`/blog/${p.slug}`} className="card overflow-hidden group block">
-                  <div className="h-44 flex items-center justify-center" style={{ background: 'linear-gradient(135deg,#FCEEF1,#F5EDF9)' }}>
-                    <span className="text-4xl">🐾</span>
-                  </div>
-                  <div className="p-5">
-                    <span className="font-body text-xs font-bold mb-2 block capitalize" style={{ color: 'var(--color-primary)' }}>
-                      {p.category.replace(/-/g, ' ')}
-                    </span>
-                    <h3 className="font-heading text-lg font-semibold text-brand-text mb-2 group-hover:text-primary transition-colors line-clamp-2">{p.title}</h3>
-                    <p className="font-body text-sm text-brand-muted line-clamp-2 mb-3">{p.excerpt}</p>
-                    <span className="font-body text-xs text-brand-subtle">{new Date(p.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                  </div>
-                </Link>
-              ))}
+              {featuredPosts.map((p: any) => {
+                const slug = p.slug?.current ?? p.slug
+                return (
+                  <Link key={p._id ?? p.slug} href={`/blog/${slug}`} className="card overflow-hidden group block">
+                    <div className="h-44 flex items-center justify-center overflow-hidden" style={{ background: 'linear-gradient(135deg,#FCEEF1,#F5EDF9)' }}>
+                      {p.coverImage
+                        ? <img src={urlFor(p.coverImage).width(600).height(176).url()} alt={p.coverImage.alt ?? p.title} className="w-full h-full object-cover" />
+                        : <span className="text-4xl">🐾</span>
+                      }
+                    </div>
+                    <div className="p-5">
+                      <span className="font-body text-xs font-bold mb-2 block capitalize" style={{ color: 'var(--color-primary)' }}>
+                        {p.category?.replace(/-/g, ' ')}
+                      </span>
+                      <h3 className="font-heading text-lg font-semibold text-brand-text mb-2 group-hover:text-primary transition-colors line-clamp-2">{p.title}</h3>
+                      <p className="font-body text-sm text-brand-muted line-clamp-2 mb-3">{p.excerpt}</p>
+                      <span className="font-body text-xs text-brand-subtle">{new Date(p.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </section>

@@ -5,7 +5,7 @@ export function LocalBusinessSchema() {
     name: 'Soultails Veterinary Care',
     description: 'Expert integrative veterinary care for cats, dogs and senior pets. Home visits and remote consultations across the UK.',
     url: 'https://soultails.com',
-    email: 'hello@soultails.com',
+    email: 'soultailsinfo@gmail.com',
     areaServed: {
       '@type': 'Place',
       name: 'United Kingdom',

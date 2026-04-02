@@ -22,16 +22,20 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const remoteServices = [
-  { value: 'REMOTE_CONSULTATION', label: 'Remote Consultation' },
+  { value: 'REMOTE_CONSULTATION', label: 'Remote Consultation — £90 (up to 30 min)' },
+  { value: 'REMOTE_FOLLOWUP', label: 'Remote Follow-up — £50 (up to 30 min)' },
   { value: 'FELINE_BEHAVIOUR', label: 'Feline Behaviour Consultation' },
-  { value: 'NUTRITION_INTEGRATIVE', label: 'Nutrition & Integrative Care' },
+  { value: 'NUTRITION_INTEGRATIVE', label: 'Nutrition & Herbal Medicine' },
   { value: 'CHRONIC_PAIN', label: 'Chronic Pain Management' },
+  { value: 'PUPPY_KITTEN', label: 'Puppy & Kitten Consultation' },
 ]
 const homeServices = [
-  { value: 'HOME_VISIT_GENERAL', label: 'Home Visit — General' },
+  { value: 'HOME_VISIT_GENERAL', label: 'Home Visit — General Consultation — £130' },
+  { value: 'FELINE_BEHAVIOUR', label: 'Home Visit — Feline Behaviour' },
   { value: 'CHRONIC_PAIN', label: 'Home Visit — Pain Management' },
-  { value: 'PALLIATIVE_CARE', label: 'Home Visit — Palliative Care' },
-  { value: 'SENIOR_PET_CARE', label: 'Home Visit — Senior Pet Care' },
+  { value: 'ACUPUNCTURE_OSTEOPATHY', label: 'Home Visit — Acupuncture / Osteopathy' },
+  { value: 'PALLIATIVE_CARE', label: 'Home Visit — Palliative / Senior Care' },
+  { value: 'PUPPY_KITTEN', label: 'Home Visit — Puppy & Kitten' },
 ]
 
 export default function BookPage() {
@@ -109,8 +113,8 @@ export default function BookPage() {
 
         {/* Mode selector */}
         <div className="grid grid-cols-2 gap-4 mb-8">
-          {([['REMOTE', 'Remote / Online', Video, 'Connect via Zoom from home. Payment taken at booking.'],
-             ['HOME_VISIT', 'Home visit', Home, 'Dr. Claudia visits your home. Payment after visit.']] as const).map(
+          {([['REMOTE', 'Remote / Online', Video, 'Connect via Zoom. From £50–£90. Payment taken at booking.'],
+             ['HOME_VISIT', 'Home visit', Home, '£130 per visit. South East London & Kent. Payment via link before visit.']] as const).map(
             ([val, label, Icon, desc]) => (
               <button key={val} type="button" onClick={() => handleModeChange(val)}
                 className={`p-5 rounded-xl border-2 text-left transition-all duration-200 ${
@@ -182,7 +186,7 @@ export default function BookPage() {
             <Field id="preferredTime" label="Preferred time *" error={errors.preferredTime?.message}>
               <select id="preferredTime" className="input-field" {...register('preferredTime')}>
                 <option value="">Select...</option>
-                {['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'].map(t => (
+                {['10:00','11:00','12:00','13:00','14:00','15:00','16:00'].map(t => (
                   <option key={t} value={t}>{t}</option>
                 ))}
               </select>

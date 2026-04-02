@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { stripe } from '@/lib/stripe'
 import { z } from 'zod'
-import { sendBookingConfirmationToAdmin } from '@/emails'
 
 const bookingSchema = z.object({
   clientName: z.string().min(2),
@@ -76,8 +75,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ checkoutUrl: session.url, bookingId: booking.id })
     }
 
-    // Home visit → notify admin, no payment now
-    await sendBookingConfirmationToAdmin(booking)
+    // Home visit → no payment now, admin checks dashboard
     return NextResponse.json({ success: true, bookingId: booking.id, mode: 'home_visit' })
 
   } catch (err: any) {

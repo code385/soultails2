@@ -57,7 +57,7 @@ export default function ContactPage() {
           {/* Contact info */}
           <div className="lg:col-span-1 space-y-5">
             {[
-              { icon: Mail, title: 'Email', value: 'hello@soultails.com', href: 'mailto:hello@soultails.com' },
+              { icon: Mail, title: 'Email', value: 'soultailsinfo@gmail.com', href: 'mailto:soultailsinfo@gmail.com' },
               { icon: MapPin, title: 'Service area', value: 'London & surrounding areas (home visits)', href: null },
               { icon: Clock, title: 'Response time', value: 'Within 24 hours on working days', href: null },
             ].map(({ icon: Icon, title, value, href }) => (

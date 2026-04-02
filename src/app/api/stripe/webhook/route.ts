@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
 import { prisma } from '@/lib/prisma'
-import { sendPaymentConfirmationToClient, sendBookingConfirmationToAdmin } from '@/emails'
 import Stripe from 'stripe'
 
 export async function POST(req: NextRequest) {
@@ -31,11 +30,7 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    // Send emails
-    await Promise.allSettled([
-      sendPaymentConfirmationToClient(booking),
-      sendBookingConfirmationToAdmin(booking),
-    ])
+    // Email sending disabled — configure Resend domain to re-enable
   }
 
   if (event.type === 'checkout.session.expired') {

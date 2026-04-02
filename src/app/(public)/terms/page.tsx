@@ -18,7 +18,7 @@ export default function TermsPage() {
           ['Medical advice', 'Consultations provide veterinary advice based on the information provided. In case of emergency, please contact your nearest emergency veterinary practice immediately. Soultails does not provide emergency services.'],
           ['Limitation of liability', 'Soultails and Dr. Claudia Fioravanti are not liable for any indirect or consequential losses arising from the use of our services beyond the scope of standard veterinary professional liability.'],
           ['Governing law', 'These terms are governed by the laws of England and Wales. Dr. Claudia Fioravanti is registered with the Royal College of Veterinary Surgeons (RCVS).'],
-          ['Contact', 'For any queries regarding these terms, please email hello@soultails.com.'],
+          ['Contact', 'For any queries regarding these terms, please email soultailsinfo@gmail.com.'],
         ].map(([title, body]) => (
           <div key={title as string} className="mb-8">
             <h2 className="font-heading text-xl font-semibold text-brand-text mb-3">{title}</h2>

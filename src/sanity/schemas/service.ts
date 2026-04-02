@@ -38,6 +38,18 @@ export const siteSettingsSchema = defineType({
     defineField({ name:'instagram', title:'Instagram URL', type:'url' }),
     defineField({ name:'linkedin', title:'LinkedIn URL', type:'url' }),
     defineField({ name:'facebook', title:'Facebook URL', type:'url' }),
+    defineField({
+      name:'quote', title:'Doctor Quote', type:'text', rows:3,
+      description:'Quote shown on the About page (without quotation marks)'
+    }),
+    defineField({
+      name:'aboutValues', title:'Values / Approach', type:'array',
+      description:'Cards shown in "The values behind the care" section',
+      of:[{ type:'object', fields:[
+        defineField({ name:'title', title:'Title', type:'string' }),
+        defineField({ name:'desc', title:'Description', type:'text', rows:2 }),
+      ], preview:{ select:{ title:'title' } } }]
+    }),
   ],
   preview:{ prepare:()=>({ title:'Site Settings' }) },
 })

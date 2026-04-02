@@ -2,14 +2,22 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowRight, CheckCircle, ArrowLeft, Clock, Video, Home } from 'lucide-react'
+import { getAllServices, getServiceBySlug } from '@/lib/sanity'
 import { STATIC_SERVICES } from '@/lib/staticData'
+import { PortableText } from '@portabletext/react'
+import { portableTextComponents } from '@/components/PortableTextRenderer'
+
+export const revalidate = 60
 
 export async function generateStaticParams() {
-  return STATIC_SERVICES.map(s => ({ slug: s.slug }))
+  const sanityServices = await getAllServices().catch(() => [])
+  const services = sanityServices.length > 0 ? sanityServices : STATIC_SERVICES
+  return services.map((s: any) => ({ slug: s.slug }))
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const service = STATIC_SERVICES.find(s => s.slug === params.slug)
+  const sanityService = await getServiceBySlug(params.slug).catch(() => null)
+  const service = sanityService ?? STATIC_SERVICES.find(s => s.slug === params.slug)
   if (!service) return { title: 'Service not found' }
   return {
     title: service.name,
@@ -17,11 +25,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const service = STATIC_SERVICES.find(s => s.slug === params.slug)
+export default async function ServicePage({ params }: { params: { slug: string } }) {
+  const sanityService = await getServiceBySlug(params.slug).catch(() => null)
+  const service = sanityService ?? STATIC_SERVICES.find(s => s.slug === params.slug)
   if (!service) notFound()
 
-  const related = STATIC_SERVICES.filter(s => s.slug !== service.slug).slice(0, 3)
+  const allSanityServices = await getAllServices().catch(() => [])
+  const allServices = allSanityServices.length > 0 ? allSanityServices : STATIC_SERVICES
+  const related = allServices.filter((s: any) => s.slug !== service.slug).slice(0, 3)
 
   return (
     <>
@@ -63,21 +74,28 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             <div className="lg:col-span-2">
               <h2 className="font-heading text-2xl font-semibold text-brand-text mb-6">About this service</h2>
               <div className="space-y-4">
-                {service.fullDescription.map((para, i) => (
-                  <p key={i} className="font-body text-brand-muted leading-relaxed">{para}</p>
-                ))}
+                {Array.isArray(service.fullDescription) && service.fullDescription.length > 0 && (
+                  typeof service.fullDescription[0] === 'string'
+                    ? service.fullDescription.map((para: string, i: number) => (
+                        <p key={i} className="font-body text-brand-muted leading-relaxed">{para}</p>
+                      ))
+                    : <PortableText value={service.fullDescription} components={portableTextComponents} />
+                )}
               </div>
 
-              {service.whatToExpect && (
+              {service.whatToExpect && service.whatToExpect.length > 0 && (
                 <div className="mt-10">
                   <h3 className="font-heading text-xl font-semibold text-brand-text mb-5">What to expect</h3>
                   <div className="space-y-3">
-                    {service.whatToExpect.map((item, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <CheckCircle size={17} className="mt-0.5 flex-shrink-0" style={{ color: 'var(--color-primary)' }} />
-                        <span className="font-body text-sm text-brand-muted leading-relaxed">{item}</span>
-                      </div>
-                    ))}
+                    {typeof service.whatToExpect[0] === 'string'
+                      ? service.whatToExpect.map((item: string, i: number) => (
+                          <div key={i} className="flex items-start gap-3">
+                            <CheckCircle size={17} className="mt-0.5 flex-shrink-0" style={{ color: 'var(--color-primary)' }} />
+                            <span className="font-body text-sm text-brand-muted leading-relaxed">{item}</span>
+                          </div>
+                        ))
+                      : <PortableText value={service.whatToExpect} components={portableTextComponents} />
+                    }
                   </div>
                 </div>
               )}
@@ -126,7 +144,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <div className="container-site">
             <h2 className="font-heading text-2xl font-semibold text-brand-text mb-8">Other services</h2>
             <div className="grid sm:grid-cols-3 gap-6">
-              {related.map(s => (
+              {related.map((s: any) => (
                 <Link key={s.slug} href={`/services/${s.slug}`} className="card p-5 group block">
                   <h3 className="font-heading text-lg font-semibold text-brand-text mb-2 group-hover:text-primary transition-colors">{s.name}</h3>
                   <p className="font-body text-xs text-brand-muted mb-3 line-clamp-2">{s.shortDescription}</p>

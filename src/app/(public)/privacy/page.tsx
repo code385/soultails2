@@ -17,8 +17,8 @@ export default function PrivacyPage() {
           ['Payment security', 'All payments are processed by Stripe, a PCI-DSS compliant payment processor. We do not store your card details on our servers.'],
           ['Data retention', 'We retain your booking and contact information for up to 7 years for regulatory compliance. You may request deletion of your data at any time by contacting us.'],
           ['Cookies', 'This website uses essential cookies for authentication and analytics. By using this site you consent to our use of cookies.'],
-          ['Your rights', 'Under UK GDPR, you have the right to access, correct, or delete your personal data. To exercise these rights, please contact hello@soultails.com.'],
-          ['Contact', 'For any privacy-related queries, please email hello@soultails.com.'],
+          ['Your rights', 'Under UK GDPR, you have the right to access, correct, or delete your personal data. To exercise these rights, please contact soultailsinfo@gmail.com.'],
+          ['Contact', 'For any privacy-related queries, please email soultailsinfo@gmail.com.'],
         ].map(([title, body]) => (
           <div key={title as string} className="mb-8">
             <h2 className="font-heading text-xl font-semibold text-brand-text mb-3">{title}</h2>
