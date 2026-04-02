@@ -1,0 +1,203 @@
+# Soultails Veterinary Services — Knowledge Base
+
+## About Soultails
+
+Soultails is an integrative veterinary practice run by Dr. Claudia Fioravanti (DVM MRCVS CertAVP ISFMAdvCerFB). We provide expert, compassionate veterinary care for cats, dogs, and senior pets across the UK — combining conventional evidence-based medicine with carefully selected complementary therapies.
+
+Our tagline: "Veterinary care that treats the whole animal."
+
+Contact email: hello@soultails.com
+Service area: London & surrounding areas (home visits), UK-wide (remote consultations)
+Response time: Within 24 hours on working days
+
+---
+
+## About Dr. Claudia Fioravanti
+
+Dr. Claudia Fioravanti is a fully qualified veterinary surgeon with the following credentials:
+- DVM — Doctor of Veterinary Medicine
+- MRCVS — Member of the Royal College of Veterinary Surgeons
+- CertAVP — Certificate in Advanced Veterinary Practice
+- ISFMAdvCerFB — ISFM Advanced Certificate in Feline Behaviour (one of the highest qualifications in cat behaviour)
+
+Dr. Claudia specialises in integrative and conventional medicine, feline behaviour, chronic pain management, palliative care, and senior pet care. She believes in unhurried, compassionate consultations that treat the whole animal — not just the symptoms.
+
+---
+
+## Our Services
+
+### 1. Remote Consultation
+- Price: From £80
+- Duration: 45–60 minutes
+- Mode: Online (secure Zoom video call)
+- Best for: Follow-up appointments, second opinions, behaviour assessments, non-emergency concerns, nutrition advice
+
+What to expect:
+- Secure Zoom link sent to your email before the appointment
+- Thorough history taking and visual assessment via video
+- Evidence-based recommendations combining conventional and integrative approaches
+- Written follow-up summary emailed after the consultation
+- Prescription referrals arranged with your local vet if needed
+
+---
+
+### 2. Home Visits
+- Price: From £120
+- Duration: 60–90 minutes
+- Mode: Dr. Claudia visits your home
+- Area: London & surrounding areas
+- Best for: Anxious or stressed pets, elderly animals, owners with limited mobility
+
+What to expect:
+- Dr. Claudia visits your home at the agreed time
+- Full clinical assessment in your pet's familiar environment
+- Integrative and conventional treatment recommendations
+- Written summary and care plan provided after the visit
+- Secure payment link sent by email after the consultation
+
+---
+
+### 3. Feline Behaviour
+- Price: From £90
+- Duration: 60–75 minutes
+- Mode: Remote or home visit (home visits especially recommended)
+- Best for: House soiling, aggression, hiding, over-grooming, anxiety, multi-cat household issues
+
+Dr. Claudia holds the ISFM Advanced Certificate in Feline Behaviour — one of the highest qualifications available in this specialist field.
+
+What to expect:
+- Detailed behavioural history questionnaire sent before the appointment
+- Full environmental and lifestyle assessment
+- Expert analysis of triggers and underlying causes
+- Personalised behaviour modification plan
+- Ongoing support and follow-up available
+
+---
+
+### 4. Chronic Pain Management
+- Price: From £110
+- Duration: 60–90 minutes
+- Mode: Home visit (preferred) or remote for follow-ups
+- Best for: Arthritis, musculoskeletal pain, post-surgical pain, ongoing pain conditions
+
+Chronic pain is one of the most under-recognised conditions in pets. Dr. Claudia uses a multimodal approach combining conventional analgesics with complementary therapies such as acupuncture, physiotherapy referrals, environmental modifications, and nutritional support.
+
+What to expect:
+- Comprehensive pain scoring and assessment
+- Multimodal pain management plan tailored to your pet
+- Integration of conventional and complementary approaches
+- Referrals to physiotherapists or other specialists as needed
+- Ongoing monitoring and plan adjustment
+
+---
+
+### 5. Palliative Care
+- Price: Contact for pricing
+- Duration: As needed
+- Mode: Home visit (primary)
+- Best for: Pets nearing end of life, terminal illness, quality of life support
+
+Dr. Claudia provides compassionate palliative care that supports both the animal and the entire family. The focus is on comfort, dignity, and quality of life.
+
+What to expect:
+- Compassionate, unhurried assessment in your home
+- Personalised comfort care plan
+- Pain and symptom management
+- Honest, sensitive guidance on quality of life
+- Emotional support for the whole family
+
+---
+
+### 6. Senior Pet Care
+- Price: From £90
+- Duration: 60–75 minutes
+- Mode: Remote or home visit
+- Best for: Elderly cats and dogs, age-related conditions, arthritis, cognitive decline, organ dysfunction
+
+Senior pets are more prone to arthritis, cognitive decline, organ dysfunction, and sensory changes. Dr. Claudia offers a whole-body approach considering physical signs, cognitive function, emotional wellbeing, and environmental factors.
+
+What to expect:
+- Thorough senior health assessment
+- Cognitive function and mobility evaluation
+- Personalised age-appropriate management plan
+- Nutritional and environmental recommendations
+- Ongoing monitoring and support
+
+---
+
+### 7. Nutrition & Integrative Care
+- Price: From £80
+- Duration: 45–60 minutes
+- Mode: Remote
+- Best for: Chronic conditions, food sensitivities, weight issues, health optimisation
+
+Nutrition is the foundation of health. Dr. Claudia provides personalised nutrition plans and integrative care incorporating evidence-based complementary approaches including acupuncture, herbal medicine, nutraceuticals, and lifestyle modifications.
+
+What to expect:
+- Detailed dietary history and nutritional assessment
+- Personalised nutrition plan tailored to your pet's needs
+- Evidence-based complementary therapy recommendations
+- Supplement and nutraceutical guidance
+- Written plan provided after the consultation
+
+---
+
+## How to Book
+
+To book a consultation, visit the Book page on the website or click the "Book a consultation" button. You can select your preferred service, date, and time. Payment for remote consultations is handled securely via Stripe at the time of booking. For home visits, a secure payment link is sent after the consultation.
+
+If you have questions before booking, use the Contact page or email hello@soultails.com. Dr. Claudia responds within 24 hours on working days.
+
+---
+
+## Frequently Asked Questions
+
+**Q: What areas do you cover for home visits?**
+A: Home visits are available in London and surrounding areas. Remote consultations are available UK-wide.
+
+**Q: How long does a consultation last?**
+A: Remote consultations are typically 45–60 minutes. Home visits are 60–90 minutes. Palliative care visits are as needed.
+
+**Q: Do you treat cats and dogs?**
+A: Yes, Dr. Claudia sees both cats and dogs. She has a specialist interest in feline care and holds the ISFM Advanced Certificate in Feline Behaviour.
+
+**Q: Can I get a prescription from Dr. Claudia?**
+A: For remote consultations, Dr. Claudia can arrange prescription referrals with your local vet if needed. For home visits, prescriptions can be arranged directly.
+
+**Q: What is integrative veterinary medicine?**
+A: Integrative veterinary medicine combines conventional evidence-based medicine with carefully selected complementary therapies such as acupuncture, nutritional support, herbal medicine, and physiotherapy — all grounded in scientific research. It does not replace conventional medicine but adds more treatment options for the individual patient.
+
+**Q: Is this a replacement for my regular vet?**
+A: No. Dr. Claudia's services complement your regular vet. She can provide second opinions, specialist assessments, integrative management plans, and ongoing support alongside your primary vet care.
+
+**Q: What happens in an emergency?**
+A: For any veterinary emergency, please contact your nearest emergency vet clinic or your own vet's out-of-hours service immediately. Soultails does not provide emergency services.
+
+**Q: How do I pay?**
+A: Remote consultations are paid securely online at the time of booking via Stripe. Home visits are invoiced after the appointment via a secure payment link.
+
+**Q: What if I need to cancel or reschedule?**
+A: Please contact Dr. Claudia as soon as possible at hello@soultails.com to reschedule or cancel your appointment.
+
+**Q: Is Dr. Claudia registered with the RCVS?**
+A: Yes. Dr. Claudia Fioravanti is a Member of the Royal College of Veterinary Surgeons (MRCVS), the regulatory body for veterinary surgeons in the UK.
+
+---
+
+## What is Integrative Veterinary Medicine?
+
+Integrative veterinary medicine means using the full range of available evidence-based treatments — both conventional and complementary — to achieve the best possible outcome for the patient. Dr. Claudia holds science and evidence at the core of everything she does. She does not recommend any therapy without a solid evidence base.
+
+What integrative medicine adds is breadth. For a cat with chronic arthritis, for example, conventional pain management (NSAIDs, gabapentin) may be effective but incomplete. Adding acupuncture, targeted physiotherapy, environmental modifications, and nutritional support can significantly improve outcomes and quality of life.
+
+---
+
+## Key Information for the Bot
+
+- Always direct booking queries to the Book page on the website
+- Always direct general enquiries to the Contact page or hello@soultails.com
+- For emergencies: direct to nearest emergency vet clinic or out-of-hours vet service
+- Do not invent or confirm specific appointment availability — direct to the booking page
+- Dr. Claudia responds within 24 hours on working days
+- The practice is based in London, UK
+- Currency is GBP (£)
