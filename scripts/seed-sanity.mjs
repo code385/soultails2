@@ -75,6 +75,8 @@ const services = [
     icon: 'Heart',
     serviceMode: 'both',
     priceDisplay: 'From £90',
+    remotePrice: '£90',
+    homeVisitPrice: '£130',
     duration: '60–90 minutes',
     whatToExpect: [
       'Behaviour questionnaire sent before appointment — please complete in full',
@@ -101,6 +103,8 @@ const services = [
     icon: 'Activity',
     serviceMode: 'both',
     priceDisplay: 'From £90',
+    remotePrice: '£90',
+    homeVisitPrice: '£130',
     duration: '45–60 minutes',
     whatToExpect: [
       'Comprehensive pain scoring and assessment',
@@ -127,6 +131,8 @@ const services = [
     icon: 'Star',
     serviceMode: 'both',
     priceDisplay: 'From £90',
+    remotePrice: '£90',
+    homeVisitPrice: '£130',
     duration: '45–60 minutes',
     whatToExpect: [
       'Full health assessment appropriate to age',
@@ -152,7 +158,7 @@ const services = [
     ],
     icon: 'Leaf',
     serviceMode: 'home_visit',
-    priceDisplay: 'From £90',
+    priceDisplay: '£130',
     duration: '30–60 minutes',
     whatToExpect: [
       'Assessment to determine suitability for complementary therapies',
@@ -179,6 +185,8 @@ const services = [
     icon: 'Leaf',
     serviceMode: 'both',
     priceDisplay: 'From £90',
+    remotePrice: '£90',
+    homeVisitPrice: '£130',
     duration: '45–60 minutes',
     whatToExpect: [
       'Detailed dietary history and nutritional assessment',

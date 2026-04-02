@@ -54,6 +54,8 @@ export const STATIC_SERVICES = [
     slug: "feline-behaviour",
     name: "Feline Behaviour Consultation",
     shortDescription: "Expert cat behaviour assessment by an ISFMAdvCerFB-certified professional. Requires a behaviour questionnaire completed in advance.",
+    remotePrice: "£90",
+    homeVisitPrice: "£130",
     fullDescription: [
       "Dr. Claudia Fioravanti holds the ISFM Advanced Certificate in Feline Behaviour — one of the highest qualifications available in this specialist field.",
       "Feline behaviour consultations can be particularly lengthy. We require you to fill in a behaviour questionnaire in advance and to allow us to study all the details of your concerns before the appointment.",
@@ -85,6 +87,8 @@ export const STATIC_SERVICES = [
     icon: "Activity",
     serviceMode: "both",
     priceDisplay: "From £90",
+    remotePrice: "£90",
+    homeVisitPrice: "£130",
     duration: "45–60 minutes",
     whatToExpect: [
       "Comprehensive pain scoring and assessment",
@@ -107,6 +111,8 @@ export const STATIC_SERVICES = [
     icon: "Star",
     serviceMode: "both",
     priceDisplay: "From £90",
+    remotePrice: "£90",
+    homeVisitPrice: "£130",
     duration: "45–60 minutes",
     whatToExpect: [
       "Full health assessment appropriate to age",
@@ -128,7 +134,7 @@ export const STATIC_SERVICES = [
     ],
     icon: "Leaf",
     serviceMode: "home_visit",
-    priceDisplay: "From £90",
+    priceDisplay: "£130",
     duration: "30–60 minutes",
     whatToExpect: [
       "Assessment to determine suitability for complementary therapies",
@@ -151,6 +157,8 @@ export const STATIC_SERVICES = [
     icon: "Leaf",
     serviceMode: "both",
     priceDisplay: "From £90",
+    remotePrice: "£90",
+    homeVisitPrice: "£130",
     duration: "45–60 minutes",
     whatToExpect: [
       "Detailed dietary history and nutritional assessment",
@@ -173,6 +181,8 @@ export const STATIC_SERVICES = [
     icon: "Heart",
     serviceMode: "both",
     priceDisplay: "Contact for pricing",
+    remotePrice: "£90",
+    homeVisitPrice: "£130",
     duration: "As needed",
     whatToExpect: [
       "Compassionate, unhurried assessment",
