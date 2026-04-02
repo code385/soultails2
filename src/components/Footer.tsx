@@ -20,7 +20,6 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-5">
-              <div className="relative w-14 h-14 flex-shrink-0 bg-white/10 rounded-xl p-1.5">
                 <Image src="/logo.png" alt="Soultails" fill className="object-contain p-0.5" />
               </div>
               <div>
