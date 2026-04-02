@@ -143,7 +143,7 @@ export default function AdminDashboard() {
           <h3 className="font-body text-sm font-semibold text-primary mb-0.5">Add a blog post</h3>
           <p className="font-body text-xs text-brand-muted">Open Sanity Studio to write and publish blog posts</p>
         </div>
-        <a href="/studio" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm px-5 py-2.5 flex-shrink-0">
+        <a href="https://www.sanity.io/@oVp0t3aVR/studio/xlgw8cy8lka4jbeqt4ebdcm6/soultails/structure" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm px-5 py-2.5 flex-shrink-0">
           Open CMS
         </a>
       </div>
