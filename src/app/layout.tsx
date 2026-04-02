@@ -20,7 +20,7 @@ const nunito = Nunito({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://soultails.com'),
+  metadataBase: new URL((() => { const u = process.env.NEXT_PUBLIC_SITE_URL || 'https://soultails.com'; return u.startsWith('http') ? u : `https://${u}`; })()),
   icons: {
     icon: [
       { url: '/icon.png', type: 'image/png' },
