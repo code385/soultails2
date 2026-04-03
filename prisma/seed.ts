@@ -5,7 +5,7 @@ async function main() {
   const hashed = await bcrypt.hash("Admin@Soultails2024!", 12)
   await prisma.user.upsert({
     where: { email: "soultailsinfo@gmail.com" },
-    update: {},
+    update: { password: hashed },
     create: { email: "soultailsinfo@gmail.com", password: hashed, name: "Dr. Claudia", role: "ADMIN" },
   })
   console.log("Seed complete. Login: soultailsinfo@gmail.com / Admin@Soultails2024!")

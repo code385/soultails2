@@ -22,15 +22,15 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const remoteServices = [
-  { value: 'REMOTE_CONSULTATION', label: 'Remote Consultation — £90 (up to 30 min)' },
-  { value: 'REMOTE_FOLLOWUP', label: 'Remote Follow-up — £50 (up to 30 min)' },
+  { value: 'REMOTE_CONSULTATION', label: 'Remote Consultation (up to 30 min)' },
+  { value: 'REMOTE_FOLLOWUP', label: 'Remote Follow-up (up to 30 min)' },
   { value: 'FELINE_BEHAVIOUR', label: 'Feline Behaviour Consultation' },
   { value: 'NUTRITION_INTEGRATIVE', label: 'Nutrition & Herbal Medicine' },
   { value: 'CHRONIC_PAIN', label: 'Chronic Pain Management' },
   { value: 'PUPPY_KITTEN', label: 'Puppy & Kitten Consultation' },
 ]
 const homeServices = [
-  { value: 'HOME_VISIT_GENERAL', label: 'Home Visit — General Consultation — £130' },
+  { value: 'HOME_VISIT_GENERAL', label: 'Home Visit — General Consultation' },
   { value: 'FELINE_BEHAVIOUR', label: 'Home Visit — Feline Behaviour' },
   { value: 'CHRONIC_PAIN', label: 'Home Visit — Pain Management' },
   { value: 'ACUPUNCTURE_OSTEOPATHY', label: 'Home Visit — Acupuncture / Osteopathy' },
@@ -41,7 +41,7 @@ const homeServices = [
 export default function BookPage() {
   const [mode, setMode] = useState<'REMOTE' | 'HOME_VISIT'>('REMOTE')
   const [submitting, setSubmitting] = useState(false)
-  const [successHomeVisit, setSuccessHomeVisit] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>({
@@ -66,27 +66,26 @@ export default function BookPage() {
       })
       const result = await res.json()
       if (!res.ok) throw new Error(result.error ?? 'Something went wrong')
-      if (result.checkoutUrl) {
-        window.location.href = result.checkoutUrl
-      } else {
-        setSuccessHomeVisit(true)
-      }
+      setSubmitted(true)
     } catch (e: any) {
       setError(e.message)
       setSubmitting(false)
     }
   }
 
-  if (successHomeVisit) {
+  if (submitted) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4 pt-20">
         <div className="max-w-md text-center">
           <div className="w-16 h-16 rounded-full bg-primary-light flex items-center justify-center mx-auto mb-6">
             <CheckCircle size={32} className="text-primary" />
           </div>
-          <h1 className="font-heading text-3xl font-semibold text-brand-text mb-4">Booking received!</h1>
+          <h1 className="font-heading text-3xl font-semibold text-brand-text mb-4">Enquiry received!</h1>
+          <p className="font-body text-brand-muted leading-relaxed mb-4">
+            Thank you for reaching out. Dr. Claudia will review your request and get back to you within <strong>24 hours</strong> to confirm your appointment.
+          </p>
           <p className="font-body text-brand-muted leading-relaxed mb-8">
-            Dr. Claudia will review your request and confirm your home visit by email within 24 hours. Payment will be arranged after the visit.
+            Once confirmed, you will receive a <strong>PayPal payment link</strong> by email to complete your booking.
           </p>
           <a href="/" className="btn-primary">Back to home</a>
         </div>
@@ -113,8 +112,8 @@ export default function BookPage() {
 
         {/* Mode selector */}
         <div className="grid grid-cols-2 gap-4 mb-8">
-          {([['REMOTE', 'Remote / Online', Video, 'Connect via Zoom. From £50–£90. Payment taken at booking.'],
-             ['HOME_VISIT', 'Home visit', Home, '£130 per visit. South East London & Kent. Payment via link before visit.']] as const).map(
+          {([['REMOTE', 'Remote / Online', Video, 'Connect via Zoom. Dr. Claudia will confirm and send a PayPal payment link.'],
+             ['HOME_VISIT', 'Home visit', Home, 'South East London & Kent. Dr. Claudia will confirm and send a PayPal payment link.']] as const).map(
             ([val, label, Icon, desc]) => (
               <button key={val} type="button" onClick={() => handleModeChange(val)}
                 className={`p-5 rounded-xl border-2 text-left transition-all duration-200 ${
@@ -214,20 +213,18 @@ export default function BookPage() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
                 </svg>
-                {mode === 'REMOTE' ? 'Proceeding to payment...' : 'Submitting...'}
+                Sending enquiry...
               </span>
             ) : (
               <span className="flex items-center gap-2">
-                {mode === 'REMOTE' ? 'Continue to payment' : 'Request home visit'}
+                Send enquiry request
                 <ArrowRight size={16} />
               </span>
             )}
           </button>
 
           <p className="font-body text-xs text-brand-subtle text-center">
-            {mode === 'REMOTE'
-              ? 'You will be redirected to our secure Stripe payment page.'
-              : 'No payment now. Dr. Claudia will confirm your visit by email.'}
+            No payment now. Dr. Claudia will confirm your booking and send a PayPal payment link within 24 hours.
           </p>
         </form>
       </div>

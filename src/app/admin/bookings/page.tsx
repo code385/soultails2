@@ -1,7 +1,6 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { formatDate, formatCurrency } from '@/lib/utils'
-import { Search, Filter, Send, Check, X, ChevronDown, Phone, Mail } from 'lucide-react'
+import { useEffect, useState, useCallback } from 'react'
+import { Check, X, Mail, Phone, Send } from 'lucide-react'
 
 const STATUS_COLORS: Record<string,string> = {
   PENDING: 'bg-amber-100 text-amber-700',
@@ -18,23 +17,26 @@ export default function AdminBookingsPage() {
   const [statusFilter, setStatusFilter] = useState('')
   const [modeFilter, setModeFilter] = useState('')
   const [selected, setSelected] = useState<any>(null)
-  const [payAmount, setPayAmount] = useState('')
-  const [sendingPayment, setSendingPayment] = useState(false)
+  const [markingPayPal, setMarkingPayPal] = useState(false)
   const [updating, setUpdating] = useState(false)
 
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     setLoading(true)
     const params = new URLSearchParams()
     if (statusFilter) params.set('status', statusFilter)
     if (modeFilter) params.set('mode', modeFilter)
+
     const res = await fetch(`/api/admin/bookings?${params}`)
     const data = await res.json()
+
     setBookings(data.bookings ?? [])
     setTotal(data.total ?? 0)
     setLoading(false)
-  }
+  }, [statusFilter, modeFilter])
 
-  useEffect(() => { fetchBookings() }, [statusFilter, modeFilter])
+  useEffect(() => {
+    fetchBookings()
+  }, [fetchBookings])
 
   const updateStatus = async (id: string, status: string) => {
     setUpdating(true)
@@ -48,21 +50,19 @@ export default function AdminBookingsPage() {
     setUpdating(false)
   }
 
-  const sendPaymentLink = async () => {
-    if (!selected || !payAmount) return
-    setSendingPayment(true)
-    const amount = Math.round(parseFloat(payAmount) * 100)
+  const markPayPalSent = async () => {
+    if (!selected) return
+    setMarkingPayPal(true)
     const res = await fetch('/api/admin/send-payment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bookingId: selected.id, amount }),
+      body: JSON.stringify({ bookingId: selected.id }),
     })
     if (res.ok) {
-      alert(`Payment link sent to ${selected.clientEmail}`)
-      setPayAmount('')
+      setSelected((prev: any) => ({ ...prev, paymentStatus: 'PAYMENT_LINK_SENT' }))
       fetchBookings()
     }
-    setSendingPayment(false)
+    setMarkingPayPal(false)
   }
 
   return (
@@ -72,7 +72,6 @@ export default function AdminBookingsPage() {
         <p className="font-body text-sm text-brand-muted">{total} total bookings</p>
       </div>
 
-      {/* Filters */}
       <div className="flex flex-wrap gap-3 mb-5">
         <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}
           className="input-field w-auto text-sm pr-8">
@@ -88,7 +87,6 @@ export default function AdminBookingsPage() {
       </div>
 
       <div className="flex gap-5">
-        {/* Bookings list */}
         <div className="flex-1 bg-white rounded-xl border border-linen overflow-hidden">
           {loading ? (
             <div className="p-8 text-center font-body text-sm text-brand-subtle">Loading...</div>
@@ -110,8 +108,11 @@ export default function AdminBookingsPage() {
                     </div>
                     <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
                       <span className={`font-body text-xs font-medium px-2 py-0.5 rounded-full ${STATUS_COLORS[b.status] ?? 'bg-gray-100 text-gray-600'}`}>{b.status}</span>
-                      {b.paymentStatus === 'PAID' && b.amount && (
-                        <span className="font-body text-xs text-green-600 font-medium">{formatCurrency(b.amount)}</span>
+                      {b.paymentStatus === 'PAYMENT_LINK_SENT' && (
+                        <span className="font-body text-xs text-blue-600 font-medium">PayPal sent</span>
+                      )}
+                      {b.paymentStatus === 'PAID' && (
+                        <span className="font-body text-xs text-green-600 font-medium">Paid</span>
                       )}
                     </div>
                   </div>
@@ -121,7 +122,6 @@ export default function AdminBookingsPage() {
           )}
         </div>
 
-        {/* Detail panel */}
         {selected && (
           <div className="w-80 flex-shrink-0 bg-white rounded-xl border border-linen p-5 h-fit sticky top-0">
             <div className="flex items-center justify-between mb-4">
@@ -140,7 +140,6 @@ export default function AdminBookingsPage() {
                 ['Preferred', `${selected.preferredDate} ${selected.preferredTime}`],
                 ['Status', selected.status],
                 ['Payment', selected.paymentStatus],
-                ...(selected.amount ? [['Amount', formatCurrency(selected.amount)]] : []),
               ].map(([k, v]) => (
                 <div key={k} className="flex gap-2">
                   <span className="text-brand-subtle w-20 flex-shrink-0">{k}</span>
@@ -156,7 +155,6 @@ export default function AdminBookingsPage() {
               </div>
             )}
 
-            {/* Status actions */}
             <div className="space-y-2 mb-4">
               {selected.status === 'PENDING' && (
                 <button onClick={() => updateStatus(selected.id, 'CONFIRMED')}
@@ -181,29 +179,28 @@ export default function AdminBookingsPage() {
               )}
             </div>
 
-            {/* Send payment link for home visits */}
-            {selected.serviceMode === 'HOME_VISIT' && selected.paymentStatus !== 'PAID' && (
-              <div className="border-t border-linen pt-4">
-                <p className="font-body text-xs font-semibold text-brand-text mb-2">Send payment link</p>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    placeholder="Amount £"
-                    value={payAmount}
-                    onChange={e => setPayAmount(e.target.value)}
-                    className="input-field text-sm flex-1"
-                  />
-                  <button onClick={sendPaymentLink}
-                    disabled={!payAmount || sendingPayment}
-                    className="btn-primary text-sm px-3 py-2 disabled:opacity-60">
-                    <Send size={14} />
-                  </button>
-                </div>
+            {selected.paymentStatus !== 'PAID' && selected.paymentStatus !== 'PAYMENT_LINK_SENT' && (
+              <div className="border-t border-linen pt-4 mb-4">
+                <p className="font-body text-xs font-semibold text-brand-text mb-1">PayPal payment</p>
+                <p className="font-body text-xs text-brand-muted mb-3">
+                  Send a PayPal payment link manually to <span className="font-semibold text-brand-text">{selected.clientEmail}</span>, then mark it as sent below.
+                </p>
+                <button onClick={markPayPalSent}
+                  disabled={markingPayPal}
+                  className="btn-primary w-full justify-center text-sm py-2.5 disabled:opacity-60">
+                  <Send size={14} />
+                  {markingPayPal ? 'Marking...' : 'Mark PayPal link sent'}
+                </button>
               </div>
             )}
 
-            {/* Contact client */}
-            <div className="border-t border-linen pt-4 flex gap-2 mt-4">
+            {selected.paymentStatus === 'PAYMENT_LINK_SENT' && (
+              <div className="border-t border-linen pt-4 mb-4">
+                <p className="font-body text-xs text-blue-600 font-semibold">PayPal link sent — awaiting payment</p>
+              </div>
+            )}
+
+            <div className="border-t border-linen pt-4 flex gap-2">
               <a href={`mailto:${selected.clientEmail}`}
                 className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-cream rounded-lg text-xs font-body text-brand-muted hover:text-primary transition-colors">
                 <Mail size={13} /> Email

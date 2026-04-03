@@ -16,12 +16,11 @@ export default function BookSuccessPage() {
         </div>
 
         <h1 className="font-heading text-4xl font-semibold text-brand-text mb-4">
-          Booking confirmed!
+          Enquiry received!
         </h1>
 
         <p className="font-body text-lg text-brand-muted leading-relaxed mb-8">
-          Your payment was successful and your consultation is booked. 
-          Dr. Claudia will send you a Zoom link before your appointment.
+          Thank you for getting in touch. Dr. Claudia will review your request and contact you within <strong>24 hours</strong> to confirm your appointment and send a <strong>PayPal payment link</strong>.
         </p>
 
         <div className="bg-white rounded-2xl border border-linen p-6 mb-8 text-left space-y-4">
@@ -31,7 +30,7 @@ export default function BookSuccessPage() {
             </div>
             <div>
               <div className="font-body text-sm font-semibold text-brand-text mb-0.5">Check your email</div>
-              <div className="font-body text-sm text-brand-muted">A confirmation with your booking details has been sent to your email address.</div>
+              <div className="font-body text-sm text-brand-muted">A confirmation of your enquiry has been sent to your email address.</div>
             </div>
           </div>
           <div className="flex items-start gap-3">
@@ -39,8 +38,8 @@ export default function BookSuccessPage() {
               <Calendar size={16} className="text-primary" />
             </div>
             <div>
-              <div className="font-body text-sm font-semibold text-brand-text mb-0.5">How to prepare</div>
-              <div className="font-body text-sm text-brand-muted">Have your pet nearby, note any symptoms or questions, and ensure good lighting for your video call.</div>
+              <div className="font-body text-sm font-semibold text-brand-text mb-0.5">What happens next</div>
+              <div className="font-body text-sm text-brand-muted">Dr. Claudia will confirm your date & time, then send a secure PayPal payment link to complete your booking.</div>
             </div>
           </div>
         </div>
