@@ -76,6 +76,6 @@ export async function POST(req: NextRequest) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ error: 'Invalid form data', details: err.errors }, { status: 400 })
     }
-    return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 })
+    return NextResponse.json({ error: err?.message ?? 'Something went wrong. Please try again.' }, { status: 500 })
   }
 }

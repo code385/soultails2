@@ -53,7 +53,7 @@ export default async function HomePage() {
                 <span className="tag-dot" />
                 Expert Integrative Veterinary Care
               </div>
-             <h1 className="font-heading font-bold text-brand-text leading-[1.08] mb-6" style={{ fontSize: 'clamp(2.4rem,5vw,3.75rem)' }}>
+              <h1 className="font-heading font-bold text-brand-text leading-[1.08] mb-6" style={{ fontSize: 'clamp(2.4rem,5vw,3.75rem)' }}>
                 Veterinary care that treats{' '}
                 <em className="not-italic text-gradient">the pet</em> as a whole
               </h1>
