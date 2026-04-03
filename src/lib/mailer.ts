@@ -14,6 +14,7 @@ export function getTransporter(): nodemailer.Transporter {
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_APP_PASSWORD,
       },
+      tls: { rejectUnauthorized: false },
     })
   }
   return _transporter

@@ -19,8 +19,8 @@ export async function POST(req: NextRequest) {
 
     await prisma.contactMessage.create({ data })
 
-    // Send email notification to admin
-    await transporter.sendMail({
+    // Send email notification to admin (non-blocking)
+    transporter.sendMail({
       from: `"Soultails Contact" <${ADMIN_EMAIL}>`,
       to: ADMIN_EMAIL,
       replyTo: data.email,
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
           <p style="color:#aaa;font-size:12px;margin-top:24px">Reply directly to this email to respond to ${data.name}.</p>
         </div>
       `,
-    })
+    }).catch(err => console.error('[CONTACT EMAIL]', err))
 
     return NextResponse.json({ success: true })
   } catch (err: any) {
