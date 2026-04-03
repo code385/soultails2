@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { resend } from '@/lib/resend'
+import { transporter, ADMIN_EMAIL } from '@/lib/mailer'
 import crypto from 'crypto'
 
 export async function POST(req: NextRequest) {
@@ -22,14 +22,13 @@ export async function POST(req: NextRequest) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
     const resetUrl = `${siteUrl}/admin/reset-password?token=${token}`
 
-    await resend.emails.send({
-      from: 'Soultails Admin <onboarding@resend.dev>',
+    await transporter.sendMail({
+      from: `"Soultails Admin" <${ADMIN_EMAIL}>`,
       to: user.email,
       subject: 'Reset your admin password',
       html: `
         <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px;border:1px solid #eee;border-radius:12px">
           <h2 style="color:#B5527A;margin-top:0">Reset your password</h2>
-          <p style="color:#444;line-height:1.6">You requested a password reset for your Soultails admin account.</p>
           <p style="color:#444;line-height:1.6">Click the button below to set a new password. This link expires in <strong>1 hour</strong>.</p>
           <a href="${resetUrl}" style="display:inline-block;margin:16px 0;padding:12px 24px;background:#B5527A;color:#fff;border-radius:8px;text-decoration:none;font-weight:600">
             Reset Password

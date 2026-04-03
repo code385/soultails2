@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { resend } from '@/lib/resend'
+import { transporter, ADMIN_EMAIL } from '@/lib/mailer'
 import { z } from 'zod'
-
-const ADMIN_EMAIL = 'soultailsinfo@gmail.com'
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -21,11 +19,10 @@ export async function POST(req: NextRequest) {
 
     await prisma.contactMessage.create({ data })
 
-    // Notify admin
-    resend.emails.send({
-      from: 'Soultails Contact <onboarding@resend.dev>',
+    transporter.sendMail({
+      from: `"Soultails Contact" <${ADMIN_EMAIL}>`,
       to: ADMIN_EMAIL,
-      reply_to: data.email,
+      replyTo: data.email,
       subject: `New message: ${data.subject ?? 'Contact Form'} — ${data.name}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:32px;border:1px solid #eee;border-radius:12px">
@@ -39,7 +36,6 @@ export async function POST(req: NextRequest) {
           </table>
           <hr style="border:none;border-top:1px solid #eee;margin:16px 0"/>
           <p style="color:#444;white-space:pre-wrap;line-height:1.6">${data.message}</p>
-          <p style="color:#aaa;font-size:12px;margin-top:24px">Reply directly to this email to respond to ${data.name}.</p>
         </div>
       `,
     }).catch(err => console.error('[CONTACT EMAIL]', err))
