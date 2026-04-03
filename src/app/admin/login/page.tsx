@@ -2,6 +2,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import { Eye, EyeOff, Lock, Mail, AlertCircle } from 'lucide-react'
 
 function LoginForm() {
@@ -11,7 +12,7 @@ function LoginForm() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
-  const { data: session, status } = useSession()
+  const { status } = useSession()
   const searchParams = useSearchParams()
 
   useEffect(() => {
@@ -116,6 +117,12 @@ function LoginForm() {
                   {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
+            </div>
+
+            <div className="text-right -mt-1">
+              <Link href="/admin/forgot-password" className="text-xs text-brand-muted hover:text-primary transition-colors">
+                Forgot password?
+              </Link>
             </div>
 
             <button
