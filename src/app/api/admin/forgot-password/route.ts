@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { transporter, ADMIN_EMAIL } from '@/lib/mailer'
+import { resend } from '@/lib/resend'
 import crypto from 'crypto'
 
 export async function POST(req: NextRequest) {
@@ -9,11 +9,10 @@ export async function POST(req: NextRequest) {
     if (!email) return NextResponse.json({ error: 'Email required' }, { status: 400 })
 
     const user = await prisma.user.findUnique({ where: { email: email.toLowerCase().trim() } })
-    // Always return success to prevent email enumeration
     if (!user) return NextResponse.json({ success: true })
 
     const token = crypto.randomBytes(32).toString('hex')
-    const expiry = new Date(Date.now() + 1000 * 60 * 60) // 1 hour
+    const expiry = new Date(Date.now() + 1000 * 60 * 60)
 
     await prisma.user.update({
       where: { id: user.id },
@@ -23,8 +22,8 @@ export async function POST(req: NextRequest) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
     const resetUrl = `${siteUrl}/admin/reset-password?token=${token}`
 
-    await transporter.sendMail({
-      from: `"Soultails Admin" <${ADMIN_EMAIL}>`,
+    await resend.emails.send({
+      from: 'Soultails Admin <onboarding@resend.dev>',
       to: user.email,
       subject: 'Reset your admin password',
       html: `
@@ -43,9 +42,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true })
   } catch (err: any) {
     console.error('[FORGOT-PASSWORD]', err)
-    return NextResponse.json(
-      { error: 'Failed to send email. Please check server email configuration.' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to send reset email.' }, { status: 500 })
   }
 }

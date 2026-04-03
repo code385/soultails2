@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { transporter, ADMIN_EMAIL } from '@/lib/mailer'
+import { resend } from '@/lib/resend'
 import { z } from 'zod'
+
+const ADMIN_EMAIL = 'soultailsinfo@gmail.com'
 
 const bookingSchema = z.object({
   clientName: z.string().min(2),
@@ -29,10 +31,10 @@ export async function POST(req: NextRequest) {
     const modeLabel = data.serviceMode === 'REMOTE' ? 'Remote / Online' : 'Home Visit'
 
     // Notify admin
-    transporter.sendMail({
-      from: `"Soultails Bookings" <${ADMIN_EMAIL}>`,
+    resend.emails.send({
+      from: 'Soultails Bookings <onboarding@resend.dev>',
       to: ADMIN_EMAIL,
-      replyTo: data.clientEmail,
+      reply_to: data.clientEmail,
       subject: `New enquiry: ${serviceLabel} — ${data.clientName}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:32px;border:1px solid #eee;border-radius:12px">
@@ -47,15 +49,15 @@ export async function POST(req: NextRequest) {
             <tr><td style="padding:8px 0;color:#888">Preferred</td><td style="padding:8px 0;color:#222">${data.preferredDate} at ${data.preferredTime}</td></tr>
           </table>
           <hr style="border:none;border-top:1px solid #eee;margin:16px 0"/>
-          <p style="color:#444;white-space:pre-wrap;line-height:1.6"><strong>Concern:</strong><br/>${data.concern}</p>
-          <p style="color:#aaa;font-size:12px;margin-top:24px">Reply directly to this email to respond to ${data.clientName}. Then send a PayPal payment link once confirmed.</p>
+          <p style="color:#444;line-height:1.6"><strong>Concern:</strong><br/>${data.concern}</p>
+          <p style="color:#aaa;font-size:12px;margin-top:24px">Reply to this email to contact ${data.clientName}. Then send a PayPal payment link once confirmed.</p>
         </div>
       `,
-    }).catch(err => console.error('[BOOKING EMAIL]', err))
+    }).catch(err => console.error('[BOOKING ADMIN EMAIL]', err))
 
     // Auto-reply to client
-    transporter.sendMail({
-      from: `"Dr. Claudia — Soultails" <${ADMIN_EMAIL}>`,
+    resend.emails.send({
+      from: 'Dr. Claudia — Soultails <onboarding@resend.dev>',
       to: data.clientEmail,
       subject: `Enquiry received — ${serviceLabel}`,
       html: `
@@ -68,7 +70,7 @@ export async function POST(req: NextRequest) {
           <p style="color:#888;font-size:13px">Questions? Reply to this email or contact us at soultailsinfo@gmail.com</p>
         </div>
       `,
-    }).catch(err => console.error('[CLIENT EMAIL]', err))
+    }).catch(err => console.error('[BOOKING CLIENT EMAIL]', err))
 
     return NextResponse.json({ success: true, bookingId: booking.id })
   } catch (err: any) {

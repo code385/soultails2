@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { transporter, ADMIN_EMAIL } from '@/lib/mailer'
+import { resend } from '@/lib/resend'
 import { z } from 'zod'
+
+const ADMIN_EMAIL = 'soultailsinfo@gmail.com'
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -19,11 +21,11 @@ export async function POST(req: NextRequest) {
 
     await prisma.contactMessage.create({ data })
 
-    // Send email notification to admin (non-blocking)
-    transporter.sendMail({
-      from: `"Soultails Contact" <${ADMIN_EMAIL}>`,
+    // Notify admin
+    resend.emails.send({
+      from: 'Soultails Contact <onboarding@resend.dev>',
       to: ADMIN_EMAIL,
-      replyTo: data.email,
+      reply_to: data.email,
       subject: `New message: ${data.subject ?? 'Contact Form'} — ${data.name}`,
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:32px;border:1px solid #eee;border-radius:12px">
