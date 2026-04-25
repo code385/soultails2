@@ -1,8 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ArrowRight, CheckCircle, ArrowLeft, Clock, Video, Home } from 'lucide-react'
-import { getAllServices, getServiceBySlug } from '@/lib/sanity'
+import { getAllServices, getServiceBySlug, urlFor } from '@/lib/sanity'
 import { STATIC_SERVICES } from '@/lib/staticData'
 import { PortableText } from '@portabletext/react'
 import { portableTextComponents } from '@/components/PortableTextRenderer'
@@ -47,11 +48,9 @@ export default async function ServicePage({ params }: { params: { slug: string }
             <h1 className="font-heading text-4xl lg:text-5xl font-bold text-brand-text mb-4">{service.name}</h1>
             <p className="font-body text-lg text-brand-muted leading-relaxed mb-6">{service.shortDescription}</p>
             <div className="flex flex-wrap gap-3">
-              {service.priceDisplay && (
-                <span className="font-body text-sm font-bold px-4 py-2 rounded-full" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)' }}>
-                  {service.priceDisplay}
-                </span>
-              )}
+              <span className="font-body text-sm font-bold px-4 py-2 rounded-full" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary)' }}>
+                Contact for pricing
+              </span>
               {service.duration && (
                 <span className="font-body text-sm text-brand-muted px-4 py-2 rounded-full border border-linen flex items-center gap-1.5">
                   <Clock size={13} /> {service.duration}
@@ -65,6 +64,24 @@ export default async function ServicePage({ params }: { params: { slug: string }
           </div>
         </div>
       </section>
+
+      {/* Service image (if uploaded) */}
+      {service.image && (
+        <div className="w-full" style={{ background: 'var(--color-cream-dark)' }}>
+          <div className="container-site pb-10">
+            <div className="relative w-full max-w-3xl h-64 lg:h-80 rounded-2xl overflow-hidden">
+              <Image
+                src={urlFor(service.image).width(900).height(500).fit('crop').url()}
+                alt={service.name}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 1024px) 100vw, 900px"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Content */}
       <section className="section-pad bg-white">
@@ -105,12 +122,10 @@ export default async function ServicePage({ params }: { params: { slug: string }
             <div className="space-y-5">
               <div className="card p-6">
                 <h3 className="font-heading text-lg font-semibold text-brand-text mb-4">Book this service</h3>
-                {service.priceDisplay && (
-                  <div className="mb-4 pb-4 border-b border-linen">
-                    <div className="font-body text-xs text-brand-subtle mb-1">Starting from</div>
-                    <div className="font-heading text-2xl font-bold" style={{ color: 'var(--color-primary)' }}>{service.priceDisplay}</div>
-                  </div>
-                )}
+                <div className="mb-4 pb-4 border-b border-linen">
+                  <div className="font-body text-xs text-brand-subtle mb-1">Pricing</div>
+                  <div className="font-body text-sm font-semibold" style={{ color: 'var(--color-primary)' }}>Contact for pricing</div>
+                </div>
                 <Link href="/book" className="btn-primary w-full mb-3">
                   Book now <ArrowRight size={14} />
                 </Link>

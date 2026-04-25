@@ -164,27 +164,9 @@ export default async function HomePage() {
                   <h3 className="font-heading text-lg font-semibold text-brand-text mb-2 group-hover:text-primary transition-colors">{s.name}</h3>
                   <p className="font-body text-sm text-brand-muted leading-relaxed mb-4">{s.shortDescription}</p>
                   <div className="flex items-center justify-between pt-4 border-t border-linen">
-                    <div>
-                      {s.serviceMode === 'both' && s.remotePrice && s.homeVisitPrice ? (
-                        <div className="space-y-0.5">
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-body text-xs text-brand-subtle">Remote</span>
-                            <span className="font-body text-sm font-bold" style={{ color: 'var(--color-primary)' }}>{s.remotePrice}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-body text-xs text-brand-subtle">Home visit</span>
-                            <span className="font-body text-sm font-bold" style={{ color: 'var(--color-primary)' }}>{s.homeVisitPrice}</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <>
-                          {s.priceDisplay && <span className="font-body text-sm font-bold" style={{ color: 'var(--color-primary)' }}>{s.priceDisplay}</span>}
-                          <div className="font-body text-xs text-brand-subtle mt-0.5">
-                            {s.serviceMode === 'home_visit' ? 'Home visit' : 'Remote'}
-                          </div>
-                        </>
-                      )}
-                    </div>
+                    <span className="font-body text-sm font-semibold" style={{ color: 'var(--color-primary)' }}>
+                      Contact for pricing
+                    </span>
                     <span className="w-8 h-8 rounded-full border border-linen flex items-center justify-center transition-all duration-200 group-hover:border-primary"
                       style={{ '--tw-border-opacity': '1' } as any}>
                       <ArrowRight size={14} className="text-brand-subtle group-hover:text-primary transition-colors" />

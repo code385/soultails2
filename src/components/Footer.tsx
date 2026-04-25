@@ -32,7 +32,7 @@ export default function Footer() {
               Compassionate, expert integrative veterinary care — in your home and online, across the UK.
             </p>
             <div className="flex gap-3">
-              {[{ href: '#', Icon: Instagram, label: 'Instagram' }, { href: '#', Icon: Linkedin, label: 'LinkedIn' }, { href: '#', Icon: Facebook, label: 'Facebook' }].map(({ href, Icon, label }) => (
+              {[{ href: 'https://www.instagram.com/soultailsvet/', Icon: Instagram, label: 'Instagram' }, { href: 'https://www.linkedin.com/in/claudia-fioravanti-87343650/', Icon: Linkedin, label: 'LinkedIn' }, { href: 'https://www.facebook.com/profile.php?id=61560734703405', Icon: Facebook, label: 'Facebook' }].map(({ href, Icon, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                   className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
                   style={{ background: 'rgba(183,132,196,0.2)' }}>

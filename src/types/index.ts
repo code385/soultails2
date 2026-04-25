@@ -7,8 +7,8 @@ export interface Post {
 export interface Service {
   _id: string; name: string; slug: { current: string }
   shortDescription: string; fullDescription?: any[]
-  icon?: string; serviceMode: "remote" | "home_visit" | "both"
-  priceDisplay?: string; duration?: string
+  icon?: string; image?: any; serviceMode: "remote" | "home_visit" | "both"
+  priceDisplay?: string; remotePrice?: string; homeVisitPrice?: string; duration?: string
   whatToExpect?: string[]; featured?: boolean; metaDescription?: string
 }
 export interface SiteSettings {

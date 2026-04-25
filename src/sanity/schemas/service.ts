@@ -9,6 +9,7 @@ export const serviceSchema = defineType({
     defineField({ name:'slug', title:'URL Slug', type:'slug', options:{ source:'name' }, validation:(R)=>R.required() }),
     defineField({ name:'shortDescription', title:'Short Description (card)', type:'text', rows:2, validation:(R)=>R.required().max(200) }),
     defineField({ name:'fullDescription', title:'Full Description (service page)', type:'array', of:[{ type:'block' }], validation:(R)=>R.required() }),
+    defineField({ name:'image', title:'Service Image', type:'image', options:{ hotspot:true }, description:'Optional photo shown on service card and detail page' }),
     defineField({ name:'icon', title:'Icon (lucide name)', type:'string', description:'e.g. Heart, Home, Video, Leaf, Cat, Activity' }),
     defineField({ name:'serviceMode', title:'Service Mode', type:'string', options:{ list:[{ title:'Remote / Online', value:'remote' },{ title:'Home Visit', value:'home_visit' },{ title:'Both', value:'both' }] }, validation:(R)=>R.required() }),
     defineField({ name:'priceDisplay', title:'Price Display (fallback)', type:'string', description:'e.g. "From £90" — used when only one mode' }),

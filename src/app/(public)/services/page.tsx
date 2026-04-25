@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Video, Home, Heart, Leaf, Activity, Star } from 'lucide-react'
-import { getAllServices } from '@/lib/sanity'
+import { getAllServices, urlFor } from '@/lib/sanity'
 import { STATIC_SERVICES } from '@/lib/staticData'
 
 export const revalidate = 60
@@ -38,38 +39,35 @@ export default async function ServicesPage() {
               const Icon = iconMap[s.icon] ?? Heart
               return (
                 <Link key={s.slug} href={`/services/${s.slug}`}
-                  className="card p-6 lg:p-7 group block flex flex-col hover:shadow-card-hover transition-all duration-300">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 transition-all duration-200 group-hover:scale-110"
-                    style={{ background: 'var(--color-primary-light)' }}>
-                    <Icon size={20} style={{ color: 'var(--color-primary)' }} />
-                  </div>
+                  className="card group block flex flex-col hover:shadow-card-hover transition-all duration-300">
+                  {s.image ? (
+                    <div className="relative w-full h-44 overflow-hidden rounded-t-xl">
+                      <Image
+                        src={urlFor(s.image).width(600).height(352).fit('crop').url()}
+                        alt={s.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                  ) : null}
+                  <div className={`p-6 lg:p-7 flex flex-col flex-1 ${s.image ? '' : 'pt-6'}`}>
+                  {!s.image && (
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 transition-all duration-200 group-hover:scale-110"
+                      style={{ background: 'var(--color-primary-light)' }}>
+                      <Icon size={20} style={{ color: 'var(--color-primary)' }} />
+                    </div>
+                  )}
                   <h2 className="font-heading text-xl font-semibold text-brand-text mb-2 group-hover:text-primary transition-colors">{s.name}</h2>
                   <p className="font-body text-sm text-brand-muted leading-relaxed mb-5 flex-1">{s.shortDescription}</p>
                   <div className="flex items-center justify-between pt-4 border-t border-linen">
-                    <div>
-                      {s.serviceMode === 'both' && s.remotePrice && s.homeVisitPrice ? (
-                        <div className="space-y-0.5">
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-body text-xs text-brand-subtle">Remote</span>
-                            <span className="font-body text-sm font-bold" style={{ color: 'var(--color-primary)' }}>{s.remotePrice}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-body text-xs text-brand-subtle">Home visit</span>
-                            <span className="font-body text-sm font-bold" style={{ color: 'var(--color-primary)' }}>{s.homeVisitPrice}</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <>
-                          {s.priceDisplay && <span className="font-body text-sm font-bold" style={{ color: 'var(--color-primary)' }}>{s.priceDisplay}</span>}
-                          <div className="font-body text-xs text-brand-subtle mt-0.5">
-                            {s.serviceMode === 'home_visit' ? 'Home visit' : 'Remote'}
-                          </div>
-                        </>
-                      )}
-                    </div>
+                    <span className="font-body text-sm font-semibold" style={{ color: 'var(--color-primary)' }}>
+                      Contact for pricing
+                    </span>
                     <span className="w-8 h-8 rounded-full border border-linen flex items-center justify-center group-hover:border-primary transition-colors">
                       <ArrowRight size={14} className="text-brand-subtle group-hover:text-primary transition-colors" />
                     </span>
+                  </div>
                   </div>
                 </Link>
               )
