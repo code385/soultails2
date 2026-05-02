@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { transporter, ADMIN_EMAIL } from '@/lib/mailer'
+import { notifyAdmin } from '@/lib/notify'
 import { z } from 'zod'
 
 const contactSchema = z.object({
@@ -39,6 +40,16 @@ export async function POST(req: NextRequest) {
         </div>
       `,
     }).catch(err => console.error('[CONTACT EMAIL]', err))
+
+    notifyAdmin(
+      `New Message: ${data.name}`,
+      `Name: ${data.name}\n` +
+      `Email: ${data.email}\n` +
+      (data.phone ? `Phone: ${data.phone}\n` : '') +
+      (data.petType ? `Pet: ${data.petType}\n` : '') +
+      (data.subject ? `Subject: ${data.subject}\n\n` : '\n') +
+      `Message: ${data.message}`
+    )
 
     return NextResponse.json({ success: true })
   } catch (err: any) {
