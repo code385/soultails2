@@ -1,6 +1,6 @@
 import nextEnv from '@next/env'
 import { createClient } from '@sanity/client'
-import { services, siteSettings } from './sanity-content.mjs'
+import { services } from './sanity-content.mjs'
 
 const { loadEnvConfig } = nextEnv
 loadEnvConfig(process.cwd())
@@ -13,21 +13,18 @@ const client = createClient({
   useCdn: false,
 })
 
-async function seed() {
-  console.log('Seeding Sanity content...')
-
-  await client.createOrReplace(siteSettings)
-  console.log('Synced site settings')
+async function run() {
+  console.log('Syncing Sanity services...')
 
   for (const service of services) {
     await client.createOrReplace(service)
     console.log(`Synced ${service.name}`)
   }
 
-  console.log('Sanity seed complete.')
+  console.log('Sanity service sync complete.')
 }
 
-seed().catch((error) => {
-  console.error('Sanity seed failed:', error)
+run().catch((error) => {
+  console.error('Sanity sync failed:', error)
   process.exit(1)
 })

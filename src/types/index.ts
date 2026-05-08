@@ -10,6 +10,8 @@ export interface Service {
   icon?: string; image?: any; serviceMode: "remote" | "home_visit" | "both"
   priceDisplay?: string; remotePrice?: string; homeVisitPrice?: string; duration?: string
   whatToExpect?: string[]; featured?: boolean; metaDescription?: string
+  bestFor?: string; availability?: string; pricingNote?: string; ctaLabel?: string
+  serviceAreaLabel?: string; hidePublicPricing?: boolean
 }
 export interface SiteSettings {
   doctorName: string; tagline?: string; bio?: any[]

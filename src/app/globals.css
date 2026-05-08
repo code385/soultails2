@@ -34,7 +34,7 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-heading);line-height:1.15}
 ::-webkit-scrollbar-thumb{background:var(--color-linen);border-radius:3px}
 
 @layer components {
-  .container-site{@apply max-w-container mx-auto px-4 sm:px-6 lg:px-8}
+  .container-site{@apply max-w-container mx-auto px-4 sm:px-5 lg:px-6}
   .section-pad{@apply py-16 lg:py-24}
 
   .btn-primary{

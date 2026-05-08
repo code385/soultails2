@@ -17,7 +17,7 @@ const config: Config = {
         heading: ["var(--font-heading)", "Georgia", "serif"],
         body: ["var(--font-body)", "system-ui", "sans-serif"],
       },
-      maxWidth: { container: "1200px" },
+      maxWidth: { container: "1320px" },
       borderRadius: { xl: "20px", "2xl": "32px" },
       boxShadow: {
         card: "0 1px 4px rgba(45,31,53,0.06), 0 4px 16px rgba(45,31,53,0.04)",

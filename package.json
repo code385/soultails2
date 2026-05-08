@@ -9,7 +9,9 @@
     "lint": "next lint",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "sanity:seed": "node scripts/seed-sanity.mjs",
+    "sanity:sync": "node scripts/sync-sanity-services.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

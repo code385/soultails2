@@ -6,3 +6,7 @@ node_modules/
 out/
 .DS_Store
 *.log
+dist/
+.claude/
+.vercel/
+tsconfig.tsbuildinfo
