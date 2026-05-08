@@ -9,9 +9,9 @@ import { SHARED_PAYMENT_MESSAGE } from '@/lib/serviceCatalog'
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: 'Soultails | Expert Integrative Veterinary Care UK',
+  title: 'Integrative Vet London & Remote UK | Soultails Veterinary Care',
   description:
-    'Expert integrative veterinary care for cats, dogs and senior pets. Home visits in South East London and parts of Kent, plus remote consultations across the UK.',
+    'Integrative vet care in South East London and online across the UK. Home visits, feline behaviour, chronic pain support, senior pet care, nutrition and pet transport.',
 }
 
 const iconMap: Record<string, any> = { Video, Home, Heart, Leaf, Activity, Cat: Heart, Star }
@@ -64,7 +64,7 @@ export default async function HomePage() {
                 Veterinary care that treats <em className="not-italic text-gradient">the pet</em> as a whole
               </h1>
               <p className="font-body text-lg text-brand-muted leading-relaxed mb-8">
-                Integrative, compassionate veterinary care for cats, dogs and senior pets - in your home and online, across the UK.
+                Integrative, compassionate veterinary care for cats, dogs and senior pets - home visits in South East London and parts of Kent, plus remote consultations across the UK.
               </p>
               <div className="flex flex-wrap gap-3 mb-10">
                 <Link href="/book" className="btn-primary px-7 py-3.5 text-base gap-2.5">
@@ -123,6 +123,20 @@ export default async function HomePage() {
                 <div className="font-heading text-sm font-semibold">Remote consultations and home visits</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-10 border-y border-linen">
+        <div className="container-site">
+          <div className="max-w-4xl">
+            <h2 className="font-heading text-2xl lg:text-3xl font-semibold text-brand-text mb-4">
+              Integrative veterinary care in London and online across the UK
+            </h2>
+            <p className="font-body text-brand-muted leading-relaxed">
+              Soultails provides home visit vet support in South East London and parts of Kent, along with remote vet consultations across the UK.
+              Families can get help with feline behaviour, chronic pain management, senior pet care, palliative support, nutrition and calm assisted pet transport.
+            </p>
           </div>
         </div>
       </section>
