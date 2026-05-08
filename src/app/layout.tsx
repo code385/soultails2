@@ -24,10 +24,18 @@ export const metadata: Metadata = {
     const url = process.env.NEXT_PUBLIC_SITE_URL || 'https://soultails.com'
     return url.startsWith('http') ? url : `https://${url}`
   })()),
-  icons: {
-    icon: [{ url: '/icon.png', type: 'image/png' }],
-    apple: '/icon.png',
+  alternates: {
+    canonical: '/',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo.png', type: 'image/png', sizes: '512x512' },
+    ],
+    shortcut: ['/favicon.ico'],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
+  manifest: '/manifest.webmanifest',
   title: {
     default: 'Soultails | Expert Integrative Veterinary Care - Dr. Claudia Fioravanti',
     template: '%s | Soultails Veterinary Care',
@@ -60,6 +68,7 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
+  category: 'Veterinary Services',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -5,6 +5,8 @@ export function LocalBusinessSchema() {
     name: 'Soultails Veterinary Care',
     description: 'Expert integrative veterinary care for cats, dogs and senior pets. Home visits and remote consultations across the UK.',
     url: 'https://soultails.com',
+    image: 'https://soultails.com/logo.png',
+    logo: 'https://soultails.com/logo.png',
     email: 'soultailsinfo@gmail.com',
     areaServed: {
       '@type': 'Place',
@@ -61,6 +63,10 @@ export function BlogPostSchema({ title, excerpt, publishedAt, slug }: {
       '@type': 'Organization',
       name: 'Soultails Veterinary Care',
       url: 'https://soultails.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://soultails.com/logo.png',
+      },
     },
   }
 
