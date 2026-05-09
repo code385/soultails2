@@ -8,9 +8,11 @@ import { STATIC_SERVICES } from '@/lib/staticData'
 import { PortableText } from '@portabletext/react'
 import { portableTextComponents } from '@/components/PortableTextRenderer'
 import {
+  DOCTOR_PROFILE_IMAGE_FALLBACK,
   EMERGENCY_DISCLAIMER,
   SHARED_PAYMENT_MESSAGE,
   getBookingHref,
+  getServiceImageFallback,
   getResolvedServiceEnhancement,
 } from '@/lib/serviceCatalog'
 
@@ -43,6 +45,9 @@ export default async function ServicePage({ params }: { params: { slug: string }
   const allServices = allSanityServices.length > 0 ? allSanityServices : STATIC_SERVICES
   const related = allServices.filter((item: any) => item.slug !== service.slug).slice(0, 3)
   const bookingHref = getBookingHref(service.slug)
+  const serviceImageSrc = service.image
+    ? urlFor(service.image).width(900).height(500).fit('crop').url()
+    : getServiceImageFallback(service.slug)
 
   return (
     <>
@@ -90,12 +95,12 @@ export default async function ServicePage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {service.image ? (
+      {serviceImageSrc ? (
         <div className="w-full" style={{ background: 'var(--color-cream-dark)' }}>
           <div className="container-site pb-10">
             <div className="relative w-full max-w-3xl h-64 lg:h-80 rounded-2xl overflow-hidden">
               <Image
-                src={urlFor(service.image).width(900).height(500).fit('crop').url()}
+                src={serviceImageSrc}
                 alt={service.name}
                 fill
                 className="object-cover"
@@ -170,6 +175,14 @@ export default async function ServicePage({ params }: { params: { slug: string }
 
               <div className="card p-6" style={{ background: 'var(--color-primary-light)', borderColor: 'rgba(200,91,110,0.15)' }}>
                 <h3 className="font-heading text-base font-semibold text-brand-text mb-2">About Dr. Claudia</h3>
+                <div className="relative w-20 h-20 rounded-2xl overflow-hidden mb-4 border border-white/70">
+                  <Image
+                    src={DOCTOR_PROFILE_IMAGE_FALLBACK}
+                    alt="Dr. Claudia Fioravanti"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
                 <p className="font-body text-sm text-brand-muted leading-relaxed mb-3">
                   DVM · MRCVS · CertAVP · ISFMAdvCerFB - Expert integrative veterinary care with a focus on whole-animal wellbeing.
                 </p>

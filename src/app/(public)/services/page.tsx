@@ -10,6 +10,7 @@ import {
   SERVICES_PAGE_FAQS,
   SHARED_PAYMENT_MESSAGE,
   getBookingHref,
+  getServiceImageFallback,
   getResolvedServiceEnhancement,
 } from '@/lib/serviceCatalog'
 
@@ -85,12 +86,15 @@ export default async function ServicesPage() {
               const Icon = iconMap[service.icon] ?? Heart
               const enhancement = getResolvedServiceEnhancement(service)
               const bookingHref = getBookingHref(service.slug)
+              const serviceImageSrc = service.image
+                ? urlFor(service.image).width(600).height(352).fit('crop').url()
+                : getServiceImageFallback(service.slug)
               return (
                 <article key={service.slug} className="card group flex flex-col overflow-hidden">
-                  {service.image ? (
+                  {serviceImageSrc ? (
                     <div className="relative h-44 w-full overflow-hidden rounded-t-xl">
                       <Image
-                        src={urlFor(service.image).width(600).height(352).fit('crop').url()}
+                        src={serviceImageSrc}
                         alt={service.name}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -99,8 +103,8 @@ export default async function ServicesPage() {
                     </div>
                   ) : null}
 
-                  <div className={`flex flex-1 flex-col p-6 lg:p-7 ${service.image ? '' : 'pt-6'}`}>
-                    {!service.image ? (
+                  <div className={`flex flex-1 flex-col p-6 lg:p-7 ${serviceImageSrc ? '' : 'pt-6'}`}>
+                    {!serviceImageSrc ? (
                       <div
                         className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-200 group-hover:scale-110"
                         style={{ background: 'var(--color-primary-light)' }}

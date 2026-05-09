@@ -6,6 +6,14 @@ const block = (key, text) => ({
   children: [{ _type: 'span', _key: `${key}s`, text }],
 })
 
+const imageRef = (_ref) => ({
+  _type: 'image',
+  asset: {
+    _type: 'reference',
+    _ref,
+  },
+})
+
 export const services = [
   {
     _type: 'service',
@@ -20,6 +28,7 @@ export const services = [
       block('hv3', "Most visits last 30 to 40 minutes, though it is best to allow up to an hour so your pet can be seen without rushing."),
       block('hv4', "Appointments are confirmed after Dr. Claudia reviews your enquiry, confirms availability and sends a secure PayPal payment link."),
     ],
+    image: imageRef('image-2729ebb8a003caebca90e5da82ecee6331b11157-3264x2448-jpg'),
     icon: 'Home',
     serviceMode: 'home_visit',
     priceDisplay: '£130',
@@ -56,6 +65,7 @@ export const services = [
       block('rc2', "Before your appointment, you'll receive a secure Zoom link. Dr. Claudia will take time to listen, observe your pet where possible and provide a considered assessment."),
       block('rc3', 'Remote follow-up appointments are also available when ongoing support is needed.'),
     ],
+    image: imageRef('image-a76c0efba7dc4c770506d3e0f0138a318c7ab4a1-3484x2457-jpg'),
     icon: 'Video',
     serviceMode: 'remote',
     priceDisplay: 'From £90',
@@ -93,6 +103,7 @@ export const services = [
       block('fb3', 'Behaviour concerns can involve the home environment, medical factors, routine, social tension and unmet behavioural needs. Each case is approached holistically.'),
       block('fb4', "Home visits can be especially valuable for behaviour cases because they allow the cat's environment to be considered directly."),
     ],
+    image: imageRef('image-95df494a9ed0e1b93ba622ba89787566c1c5aeab-2832x4240-jpg'),
     icon: 'Heart',
     serviceMode: 'both',
     priceDisplay: 'From £90',
@@ -131,6 +142,7 @@ export const services = [
       block('cp2', 'Dr. Claudia uses a multimodal approach that may include pain scoring, medication review, lifestyle advice, acupuncture, osteopathy, massage, herbal support and nutrition guidance.'),
       block('cp3', "Ongoing reviews are often useful so the plan can evolve with your pet's comfort, mobility and quality of life."),
     ],
+    image: imageRef('image-8662852b2964ca9a1c3d39e1e5a0b32ad369d7ee-1448x1086-png'),
     icon: 'Activity',
     serviceMode: 'both',
     priceDisplay: 'From £90',
@@ -169,6 +181,7 @@ export const services = [
       block('pk2', 'These consultations go beyond a basic health check and cover feeding, parasite prevention, vaccination discussions, socialisation and early behaviour foundations.'),
       block('pk3', 'Recommendations are tailored to your pet, their breed, their home environment and your goals as a family.'),
     ],
+    image: imageRef('image-314e31a73e46b680bfb340639d0289a9299fe5f4-2160x3840-jpg'),
     icon: 'Star',
     serviceMode: 'both',
     priceDisplay: 'From £90',
@@ -206,6 +219,7 @@ export const services = [
       block('ao2', 'These therapies are used to support comfort, mobility, healing and quality of life as part of a wider treatment plan.'),
       block('ao3', 'They are always integrated with conventional veterinary medicine rather than used as a substitute for it.'),
     ],
+    image: imageRef('image-f50bfdda809dc6a277a3016c9cfc6f7f46e0b5d1-3264x2448-jpg'),
     icon: 'Leaf',
     serviceMode: 'home_visit',
     priceDisplay: '£130',
@@ -241,6 +255,7 @@ export const services = [
       block('nh2', 'Dr. Claudia reviews diet, routine, medical history and current concerns to build a practical plan for your pet.'),
       block('nh3', 'Where appropriate, herbal medicine, nutraceuticals and other integrative options may be included alongside conventional care.'),
     ],
+    image: imageRef('image-5f503408e832bb59ba9f080ac9732b9e65ba93f6-3072x4608-jpg'),
     icon: 'Leaf',
     serviceMode: 'both',
     priceDisplay: 'From £90',
@@ -278,6 +293,7 @@ export const services = [
       block('ps2', 'Dr. Claudia supports families with comfort-focused care, symptom management, quality-of-life discussions and planning for the next steps.'),
       block('ps3', 'Senior pet consultations also help review mobility, cognition, behaviour, environment and routine so life can remain as comfortable and meaningful as possible.'),
     ],
+    image: imageRef('image-4f37719ee49fd560b554e212f3065a6a77d420df-4032x3024-jpg'),
     icon: 'Heart',
     serviceMode: 'both',
     priceDisplay: 'Pricing confirmed after enquiry',
@@ -315,6 +331,7 @@ export const services = [
       block('pt2', 'Soultails offers pet transport support designed to reduce stress and keep the journey as calm and safe as possible.'),
       block('pt3', "Availability depends on distance, timing and your pet's individual needs."),
     ],
+    image: imageRef('image-3300a89015c92d662f252d17c67824cfe60ffd80-1448x1086-png'),
     icon: 'Home',
     serviceMode: 'home_visit',
     duration: 'Varies by journey',
@@ -341,6 +358,7 @@ export const siteSettings = {
   _id: 'siteSettings',
   doctorName: 'Dr. Claudia Fioravanti',
   tagline: 'Bringing high quality veterinary care to the comfort of your home',
+  profileImage: imageRef('image-649e3f7782ac832dd76846cc08e4a568a2af632e-7680x5120-jpg'),
   bio: [
     block('bio1', "Soultails aims to bring high-quality veterinary care into the comfort of your home, tailored to your pet's individual needs and personality."),
     block('bio2', 'Family members also play an important role in the healing journey, and Soultails aims to guide you towards the best route for your pet\'s long-term wellbeing.'),

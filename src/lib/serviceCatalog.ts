@@ -213,6 +213,25 @@ export const SERVICE_ENHANCEMENTS: Record<string, ServiceEnhancement> = {
   },
 }
 
+export const SERVICE_IMAGE_FALLBACKS: Record<string, string> = {
+  'home-visit': 'https://cdn.sanity.io/images/eirs52gp/production/2729ebb8a003caebca90e5da82ecee6331b11157-3264x2448.jpg',
+  'remote-consultation': 'https://cdn.sanity.io/images/eirs52gp/production/a76c0efba7dc4c770506d3e0f0138a318c7ab4a1-3484x2457.jpg',
+  'feline-behaviour': 'https://cdn.sanity.io/images/eirs52gp/production/95df494a9ed0e1b93ba622ba89787566c1c5aeab-2832x4240.jpg',
+  'chronic-pain-management': 'https://cdn.sanity.io/images/eirs52gp/production/8662852b2964ca9a1c3d39e1e5a0b32ad369d7ee-1448x1086.png',
+  'puppy-kitten-consultations': 'https://cdn.sanity.io/images/eirs52gp/production/314e31a73e46b680bfb340639d0289a9299fe5f4-2160x3840.jpg',
+  'acupuncture-osteopathy': 'https://cdn.sanity.io/images/eirs52gp/production/f50bfdda809dc6a277a3016c9cfc6f7f46e0b5d1-3264x2448.jpg',
+  'nutrition-integrative': 'https://cdn.sanity.io/images/eirs52gp/production/5f503408e832bb59ba9f080ac9732b9e65ba93f6-3072x4608.jpg',
+  'palliative-care': 'https://cdn.sanity.io/images/eirs52gp/production/4f37719ee49fd560b554e212f3065a6a77d420df-4032x3024.jpg',
+  'pet-transport': 'https://cdn.sanity.io/images/eirs52gp/production/3300a89015c92d662f252d17c67824cfe60ffd80-1448x1086.png',
+}
+
+export const DOCTOR_PROFILE_IMAGE_FALLBACK =
+  'https://cdn.sanity.io/images/eirs52gp/production/649e3f7782ac832dd76846cc08e4a568a2af632e-7680x5120.jpg'
+
+export function getServiceImageFallback(slug: string) {
+  return SERVICE_IMAGE_FALLBACKS[slug]
+}
+
 export function getBookingServicesForMode(mode: BookingMode) {
   return BOOKING_SERVICES.filter((service) => service.modes.includes(mode))
 }
